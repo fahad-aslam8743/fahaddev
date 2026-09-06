@@ -1,0 +1,1 @@
+export function BrandLogo({slug,name}:{slug:string;name:string}){return <span className="brand-icon"><img src={`https://cdn.simpleicons.org/${slug}/ffffff`} alt={`${name} logo`} loading="lazy"/></span>}

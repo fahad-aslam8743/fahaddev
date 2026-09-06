@@ -1,1 +1,13 @@
-export function Partners(){return <section className="partners-section"><div className="shell"><div className="partners-copy"><span className="eyebrow">Organizations & project brands</span><h2>Real work first. Concept work clearly labeled.</h2><p>I won’t invent partnerships for social proof. Youth Senate of Pakistan is shown as a real organization I’ve built for; the other names below are portfolio project brands or platform technologies, not claimed client relationships.</p></div><div className="partner-logos"><span className="real-partner">Youth Senate of Pakistan<small>Client organization</small></span><span>ÉLITES<small>Portfolio build</small></span><span>Pulse<small>Concept project</small></span><span>Loom Studio<small>Concept project</small></span><span>Next.js<small>Technology</small></span><span>Supabase<small>Technology</small></span><span>Vercel<small>Platform</small></span></div></div></section>}
+import { Landmark, ShoppingBag, BarChart3, Armchair } from 'lucide-react';
+import { Reveal } from './Reveal';
+import { BrandLogo } from './BrandLogo';
+const items=[
+ {type:'lucide',icon:Landmark,name:'Youth Senate of Pakistan',meta:'Client organization',tone:'client'},
+ {type:'lucide',icon:ShoppingBag,name:'ÉLITES',meta:'Commerce build',tone:'work'},
+ {type:'lucide',icon:BarChart3,name:'Pulse',meta:'Analytics product',tone:'work'},
+ {type:'lucide',icon:Armchair,name:'Loom Studio',meta:'Commerce concept',tone:'work'},
+ {type:'brand',slug:'vercel',name:'Vercel',meta:'Deployment platform',tone:'tech'},
+ {type:'brand',slug:'supabase',name:'Supabase',meta:'Data platform',tone:'tech'},
+ {type:'brand',slug:'stripe',name:'Stripe',meta:'Payments platform',tone:'tech'},
+] as const;
+export function Partners(){return <section className="partners-section"><div className="shell"><Reveal className="partners-copy"><span className="eyebrow">Clients, product work & platform ecosystem</span><h2>Built in real systems, not presentation-only mockups.</h2><p>Selected organization work, product builds, and production platforms that sit behind the kind of systems I deliver.</p></Reveal><Reveal className="partner-logo-grid">{items.map((x)=>{const Icon=x.type==='lucide'?x.icon:null;return <article key={x.name} className={`partner-logo ${x.tone}`}>{x.type==='brand'?<BrandLogo slug={x.slug} name={x.name}/>:<span className="partner-custom-icon">{Icon&&<Icon/>}</span>}<div><b>{x.name}</b><small>{x.meta}</small></div></article>})}</Reveal></div></section>}

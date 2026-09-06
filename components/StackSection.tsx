@@ -1,8 +1,14 @@
-import { Code2, Database, CreditCard, Rocket } from 'lucide-react';
-const stacks=[
- {icon:Code2,title:'Frontend systems',items:['Next.js','React','TypeScript','Responsive UI']},
- {icon:Database,title:'Data & backend',items:['Supabase','APIs','Auth','Structured data']},
- {icon:CreditCard,title:'Commerce & content',items:['Stripe','Sanity CMS','Orders','Content workflows']},
- {icon:Rocket,title:'Launch & delivery',items:['Vercel','Performance','QA','Domain handoff']},
+import { ArrowUpRight } from 'lucide-react';
+import { Reveal } from './Reveal';
+import { BrandLogo } from './BrandLogo';
+const tools=[
+ {slug:'nextdotjs',name:'Next.js',use:'Fast product surfaces'},
+ {slug:'react',name:'React',use:'Interactive interfaces'},
+ {slug:'typescript',name:'TypeScript',use:'Safer changes'},
+ {slug:'supabase',name:'Supabase',use:'Auth, data & realtime'},
+ {slug:'stripe',name:'Stripe',use:'Payments & checkout'},
+ {slug:'sanity',name:'Sanity',use:'Client-managed content'},
+ {slug:'vercel',name:'Vercel',use:'Reliable delivery'},
+ {slug:'github',name:'GitHub',use:'Source ownership'},
 ];
-export function StackSection(){return <section className="section shell"><div className="section-head"><span className="eyebrow">The system behind the interface</span><h2>A practical stack chosen around the product — not around hype.</h2><p>I use tools that make the finished product fast, maintainable, easy to hand over, and realistic for the client to keep running.</p></div><div className="stack-grid">{stacks.map(({icon:Icon,title,items})=><article key={title}><span className="stack-icon"><Icon size={22}/></span><h3>{title}</h3><div>{items.map(x=><span key={x}>{x}</span>)}</div></article>)}</div></section>}
+export function StackSection(){return <section className="section stack-section"><div className="shell"><Reveal className="section-head stack-head"><span className="eyebrow">Technology chosen for the outcome</span><h2>The stack is not the product. What it lets your business do is.</h2><p>These are the tools I reach for when they make the experience faster, the system easier to operate, and the handoff cleaner.</p></Reveal><Reveal className="stack-logo-grid">{tools.map(({slug,name,use})=><article key={name}><BrandLogo slug={slug} name={name}/><div><h3>{name}</h3><p>{use}</p></div><ArrowUpRight size={16}/></article>)}</Reveal><Reveal className="stack-outcomes"><div><span>For visitors</span><b>Fast, responsive, clear paths to action.</b></div><div><span>For your team</span><b>Content, data, and operations without developer dependency.</b></div><div><span>For ownership</span><b>Source, accounts, deployment, and handoff stay clear.</b></div></Reveal></div></section>}
