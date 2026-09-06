@@ -1,0 +1,4 @@
+import { Star } from 'lucide-react';
+import { getReviews } from '@/lib/reviews';
+import { ReviewForm } from './ReviewForm';
+export async function Testimonials(){const reviews=await getReviews();return <section className="section alt"><div className="shell"><div className="section-head"><span className="eyebrow">Client feedback</span><h2>What it feels like to work together.</h2><p>Reviews are published as submitted and remain manageable from the private admin area.</p></div><div className="testimonial-layout"><div className="review-grid">{reviews.map(r=><article className="review-card" key={r.id}><div className="stars">{Array.from({length:r.rating||5}).map((_,i)=><Star key={i} size={15} fill="currentColor"/>)}</div><blockquote>“{r.message}”</blockquote><footer><b>{r.name}</b><span>{[r.role,r.company].filter(Boolean).join(' · ')}</span></footer></article>)}</div><ReviewForm/></div></div></section>}
