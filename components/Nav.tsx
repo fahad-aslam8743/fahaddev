@@ -1,48 +1,62 @@
 'use client';
 import Link from 'next/link';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Home, Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const links=[['Work','/work'],['Services','/services'],['Process','/process'],['About','/about']] as const;
+const links=[
+  ['Home','/'],
+  ['Services','/services'],
+  ['Work','/work'],
+  ['Process','/process'],
+  ['About','/about'],
+  ['Contact','/contact'],
+] as const;
 
 export function Nav(){
- const [open,setOpen]=useState(false);
- useEffect(()=>{
-   document.documentElement.classList.toggle('menu-open',open);
-   return()=>document.documentElement.classList.remove('menu-open');
- },[open]);
- useEffect(()=>{
-   const close=()=>setOpen(false);
-   window.addEventListener('resize',close);
-   return()=>window.removeEventListener('resize',close);
- },[]);
- return <>
-   <header className="nav-wrap">
-     <nav className="nav shell" aria-label="Primary navigation">
-       <Link className="wordmark" href="/" onClick={()=>setOpen(false)}>fahaddev<span>.</span></Link>
-       <div className="nav-links">
-         <span className="nav-status"><i/>Available for new projects</span>
-         {links.map(([n,h])=><Link key={h} href={h}>{n}</Link>)}
-         <Link className="btn btn-sm" href="/contact">Get a Free Project Roadmap</Link>
-       </div>
-       <button className="menu-btn" type="button" aria-expanded={open} aria-controls="mobile-navigation" aria-label={open?'Close navigation':'Open navigation'} onClick={()=>setOpen(v=>!v)}>{open?<X size={22}/>:<Menu size={22}/>}</button>
-     </nav>
-   </header>
-   <div id="mobile-navigation" className={`mobile-menu ${open?'is-open':''}`} aria-hidden={!open}>
-     <div className="mobile-menu-panel">
-       <div className="mobile-menu-shell shell">
-         <div className="mobile-menu-top"><span className="nav-status mobile-status"><i/>Available for new projects</span><span className="mobile-menu-label">NAVIGATION</span></div>
-         <div className="mobile-menu-links">
-           {links.map(([n,h],i)=><Link key={h} href={h} onClick={()=>setOpen(false)}><small>0{i+1}</small><b>{n}</b><ArrowUpRight size={20}/></Link>)}
-           <Link href="/contact" onClick={()=>setOpen(false)}><small>05</small><b>Start a Project</b><ArrowUpRight size={20}/></Link>
-         </div>
-         <div className="mobile-menu-bottom">
-           <p>Have a site, product, workflow, or idea that needs to perform better?</p>
-           <Link className="btn mobile-cta" href="/contact" onClick={()=>setOpen(false)}>Get a Free Project Roadmap <ArrowUpRight size={17}/></Link>
-           <a className="mobile-email" href="mailto:hello@fahaddev.com">hello@fahaddev.com</a>
-         </div>
-       </div>
-     </div>
-   </div>
- </>
+  const [open,setOpen]=useState(false);
+  useEffect(()=>{
+    const previous=document.body.style.overflow;
+    if(open) document.body.style.overflow='hidden';
+    return()=>{document.body.style.overflow=previous;};
+  },[open]);
+  useEffect(()=>{
+    const onKey=(e:KeyboardEvent)=>{if(e.key==='Escape') setOpen(false)};
+    window.addEventListener('keydown',onKey);
+    return()=>window.removeEventListener('keydown',onKey);
+  },[]);
+
+  return <>
+    <header className="site-header">
+      <div className="shell nav-inner">
+        <Link className="wordmark" href="/" aria-label="FahadDev home">FAHAD<span>DEV</span></Link>
+        <nav className="desktop-nav" aria-label="Primary navigation">
+          {links.map(([label,href])=><Link key={href} href={href}>{label}</Link>)}
+        </nav>
+        <div className="nav-actions">
+          <span className="nav-status"><i/>Available</span>
+          <Link className="nav-cta" href="/contact">Get a Free Consultation <ArrowUpRight size={15}/></Link>
+          <button className="menu-toggle" onClick={()=>setOpen(true)} aria-label="Open menu" aria-expanded={open}><Menu size={22}/></button>
+        </div>
+      </div>
+    </header>
+
+    {open && <div className="menu-overlay" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+      <div className="menu-overlay-top shell">
+        <Link className="wordmark" href="/" onClick={()=>setOpen(false)}>FAHAD<span>DEV</span></Link>
+        <button className="menu-close" onClick={()=>setOpen(false)} aria-label="Close menu"><X size={23}/></button>
+      </div>
+      <div className="menu-overlay-content shell">
+        <div className="menu-overlay-links">
+          {links.map(([label,href],i)=><Link key={href} href={href} onClick={()=>setOpen(false)}>
+            <span>0{i+1}</span><strong>{label}</strong>{label==='Home'?<Home size={20}/>:<ArrowUpRight size={20}/>} 
+          </Link>)}
+        </div>
+        <div className="menu-overlay-card">
+          <span className="eyebrow">Have a project in mind?</span>
+          <h2>Start with the business goal. I’ll help shape the technical route.</h2>
+          <Link className="btn" href="/contact" onClick={()=>setOpen(false)}>Get a Free Consultation <ArrowUpRight size={17}/></Link>
+        </div>
+      </div>
+    </div>}
+  </>;
 }

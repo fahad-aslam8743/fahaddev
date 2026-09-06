@@ -1,13 +1,12 @@
-import { Landmark, ShoppingBag, BarChart3, Armchair } from 'lucide-react';
+import { Landmark, ShoppingBag } from 'lucide-react';
 import { Reveal } from './Reveal';
 import { BrandLogo } from './BrandLogo';
 const items=[
- {type:'lucide',icon:Landmark,name:'Youth Senate of Pakistan',meta:'Client organization',tone:'client'},
- {type:'lucide',icon:ShoppingBag,name:'ÉLITES',meta:'Commerce build',tone:'work'},
- {type:'lucide',icon:BarChart3,name:'Pulse',meta:'Analytics product',tone:'work'},
- {type:'lucide',icon:Armchair,name:'Loom Studio',meta:'Commerce concept',tone:'work'},
- {type:'brand',slug:'vercel',name:'Vercel',meta:'Deployment platform',tone:'tech'},
- {type:'brand',slug:'supabase',name:'Supabase',meta:'Data platform',tone:'tech'},
- {type:'brand',slug:'stripe',name:'Stripe',meta:'Payments platform',tone:'tech'},
+ {type:'client',name:'Youth Senate of Pakistan',meta:'Organization platform'},
+ {type:'project',name:'ÉLITES',meta:'Commerce product'},
+ {type:'brand',slug:'vercel',name:'Vercel',meta:'Deployment'},
+ {type:'brand',slug:'supabase',name:'Supabase',meta:'Data & auth'},
+ {type:'brand',slug:'stripe',name:'Stripe',meta:'Payments'},
+ {type:'brand',slug:'sanity',name:'Sanity',meta:'Content'},
 ] as const;
-export function Partners(){return <section className="partners-section"><div className="shell"><Reveal className="partners-copy"><span className="eyebrow">Clients, product work & platform ecosystem</span><h2>Built in real systems, not presentation-only mockups.</h2><p>Selected organization work, product builds, and production platforms that sit behind the kind of systems I deliver.</p></Reveal><Reveal className="partner-logo-grid">{items.map((x)=>{const Icon=x.type==='lucide'?x.icon:null;return <article key={x.name} className={`partner-logo ${x.tone}`}>{x.type==='brand'?<BrandLogo slug={x.slug} name={x.name}/>:<span className="partner-custom-icon">{Icon&&<Icon/>}</span>}<div><b>{x.name}</b><small>{x.meta}</small></div></article>})}</Reveal></div></section>}
+export function Partners(){return <section className="partners-section"><div className="shell"><Reveal className="section-head centered dark-head"><span className="eyebrow">Client & delivery ecosystem</span><h2>Real organization work, real product builds, real production platforms.</h2><p>A compact view of the client and technology ecosystem behind the work — without turning the page into a wall of logos.</p></Reveal><Reveal className="partner-logo-grid">{items.map((x)=>{if(x.type==='brand') return <article className="partner-logo" key={x.name}><BrandLogo slug={x.slug} name={x.name}/><div><b>{x.name}</b><small>{x.meta}</small></div></article>; const Icon=x.type==='client'?Landmark:ShoppingBag; return <article className="partner-logo partner-highlight" key={x.name}><span className="partner-custom-icon"><Icon/></span><div><b>{x.name}</b><small>{x.meta}</small></div></article>})}</Reveal></div></section>}
