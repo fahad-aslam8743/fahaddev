@@ -1,0 +1,4 @@
+'use client';
+import Link from 'next/link'; import { Menu, X } from 'lucide-react'; import { useState } from 'react';
+const links=[['Work','/work'],['Services','/services'],['Process','/process'],['About','/about']];
+export function Nav(){const [open,setOpen]=useState(false);return <header className="nav-wrap"><nav className="nav shell"><Link className="wordmark" href="/">fahaddev</Link><div className="nav-links">{links.map(([n,h])=><Link key={h} href={h}>{n}</Link>)}<Link className="btn btn-sm" href="/contact">Book a Call</Link></div><button className="menu-btn" onClick={()=>setOpen(!open)} aria-label="Menu">{open?<X/>:<Menu/>}</button></nav>{open&&<div className="mobile-menu">{links.map(([n,h])=><Link key={h} href={h} onClick={()=>setOpen(false)}>{n}</Link>)}<Link className="btn" href="/contact" onClick={()=>setOpen(false)}>Book a Call</Link></div>}</header>}
