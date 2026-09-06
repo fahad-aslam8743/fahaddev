@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { ArrowUpRight, Menu, MessageCircle, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { Logo } from './Logo';
 
 const desktopLinks=[
@@ -15,6 +16,8 @@ const mobileLinks=[...desktopLinks,['Contact','/contact'] as const];
 
 export function Nav(){
   const [open,setOpen]=useState(false);
+  const pathname=usePathname();
+  const active=(href:string)=>href==='/'?pathname===href:pathname.startsWith(href);
   useEffect(()=>{
     if(!open) return;
     const y=window.scrollY;
@@ -41,10 +44,10 @@ export function Nav(){
       <div className="shell nav-inner">
         <Logo/>
         <nav className="desktop-nav" aria-label="Primary navigation">
-          {desktopLinks.map(([label,href])=><Link key={href} href={href}>{label}</Link>)}
+          {desktopLinks.map(([label,href])=><Link key={href} href={href} aria-current={active(href)?'page':undefined} className={active(href)?'active':''}>{label}</Link>)}
         </nav>
         <div className="nav-actions">
-          <Link className="nav-cta" href="/contact">Start a Project <ArrowUpRight size={15}/></Link>
+          <Link className="nav-cta" href="/contact#project-brief">Start a Project <ArrowUpRight size={15}/></Link>
           <button className="menu-toggle" onClick={()=>setOpen(true)} aria-label="Open navigation" aria-expanded={open}><Menu size={22}/></button>
         </div>
       </div>
@@ -53,13 +56,14 @@ export function Nav(){
       <div className="menu-overlay-top shell"><Logo/><button className="menu-close" onClick={()=>setOpen(false)} aria-label="Close navigation"><X size={23}/></button></div>
       <div className="menu-overlay-content shell">
         <nav className="menu-overlay-links" aria-label="Mobile navigation">
-          {mobileLinks.map(([label,href],i)=><Link key={href} href={href} onClick={()=>setOpen(false)}><span>0{i+1}</span><strong>{label}</strong><ArrowUpRight size={19}/></Link>)}
+          {mobileLinks.map(([label,href],i)=><Link key={href} href={href} onClick={()=>setOpen(false)} aria-current={active(href)?'page':undefined} className={active(href)?'active':''}><span>0{i+1}</span><strong>{label}</strong><ArrowUpRight size={19}/></Link>)}
         </nav>
         <div className="menu-overlay-card">
           <span className="eyebrow">Prefer a quick conversation?</span>
           <h2>Tell me what needs to work better.</h2>
+          <p>No technical brief needed. Start with the problem and the outcome you want.</p>
           <div className="menu-overlay-actions">
-            <Link className="btn" href="/contact" onClick={()=>setOpen(false)}>Start a Project</Link>
+            <Link className="btn" href="/contact#project-brief" onClick={()=>setOpen(false)}>Start a Project</Link>
             <a className="btn btn-secondary" href="https://wa.me/923255504461" target="_blank" rel="noreferrer"><MessageCircle size={17}/>WhatsApp</a>
           </div>
         </div>

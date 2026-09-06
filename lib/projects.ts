@@ -4,6 +4,14 @@ export type Project = {
 };
 export const projects: Project[] = [
   {
+    slug:'youth-senate-pakistan', title:'Youth Senate of Pakistan', short:'An organization platform bringing membership intake, senator records, admin workflows and content operations into one structured web system.',
+    clientType:'Organization Platform', timeline:'Full-stack platform', stack:['Membership','Admin workflows','Data management'],
+    problem:'Membership intake, records, administration and public-facing information become difficult to operate when they live across disconnected manual steps and separate content processes.',
+    approach:'Treat the public website and the admin side as one operating system: structured intake, clear records, manageable content and practical workflows for the people running the organization.',
+    build:'Membership intake, admin workflows, senator data, CMS-style content management, certificate and media needs, responsive public pages and production deployment.',
+    result:'A working organization platform designed to make public information and internal administration easier to manage through one connected digital workflow.'
+  },
+  {
     slug:'elites', title:'ÉLITES', short:'A luxury fashion storefront built to feel as premium as the product — full e-commerce, CMS-managed.',
     clientType:'E-commerce', timeline:'Full-stack build', stack:['Next.js','Sanity','Supabase','Stripe'],
     problem:'Premium products lose trust when the buying experience feels generic, slow, or stitched together from templates.',
@@ -28,5 +36,5 @@ export const projects: Project[] = [
     result:'A concept showing how custom commerce can preserve brand character without sacrificing clarity or speed.'
   }
 ];
-export const featuredProjects = projects;
+export const featuredProjects = projects.slice(0,3);
 export function getProject(slug:string){ return projects.find(p=>p.slug===slug); }
