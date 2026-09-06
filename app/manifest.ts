@@ -1,0 +1,2 @@
+import type { MetadataRoute } from 'next';
+export default function manifest():MetadataRoute.Manifest{return {name:'FahadDev — Custom Web Development',short_name:'FahadDev',description:'Conversion-focused websites, e-commerce systems, dashboards and full-stack web apps.',start_url:'/',display:'standalone',background_color:'#ffffff',theme_color:'#0b1220',icons:[{src:'/icon.png',sizes:'512x512',type:'image/png'},{src:'/apple-icon.png',sizes:'180x180',type:'image/png'}]}}

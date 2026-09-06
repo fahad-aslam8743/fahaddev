@@ -1,0 +1,2 @@
+import Link from 'next/link';
+export default function NotFound(){return <section className="not-found shell"><span className="eyebrow">404 · Page not found</span><h1>This route does not lead anywhere useful.</h1><p>Head back to the main site or open the work page to continue exploring.</p><div className="hero-actions"><Link className="btn" href="/">Go Home</Link><Link className="btn btn-secondary" href="/work">View Work</Link></div></section>}
