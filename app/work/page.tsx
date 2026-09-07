@@ -1,4 +1,4 @@
-import {projects} from '@/lib/projects';
+import {getProjects} from '@/lib/projects';
 import {ProjectCard} from '@/components/ProjectCard';
 import {PageHero} from '@/components/PageHero';
 import Link from 'next/link';
@@ -16,7 +16,7 @@ const faqs:FAQItem[]=[
  {q:'Can you share a live link for every project?',a:'Only where a live public deployment is available and appropriate to share. Concept projects and private systems may be presented through the case study instead.'},
  {q:'How do we start if I want something similar?',a:'Send the example you liked plus the business goal that matters in your version. The right scope is based on your problem, not copied from another project.'},
 ];
-export default function Work(){return <>
+export default async function Work(){const projects=await getProjects();return <>
 <PageHero kind="work" eyebrow="Selected work & product thinking" title="Case studies built around the problem, not just the final screen." body="See how commerce, dashboard and platform ideas are translated into responsive interfaces, connected systems and practical delivery decisions." primary={{label:'Discuss a Similar Build',href:'/contact#project-brief'}} secondary={{label:'Explore Services',href:'/services'}}/>
 <Reveal><section className="section shell"><div className="portfolio-intro"><div><span className="eyebrow">How the work is judged</span><h2>By whether the important path becomes clearer, faster or easier to operate.</h2></div><ul><li><Target/>Outcome first</li><li><Layers3/>System-level thinking</li><li><Rocket/>Production delivery</li></ul></div><div className="project-grid project-grid-wide">{projects.map(p=><ProjectCard key={p.slug} p={p}/>)}</div></section></Reveal>
 <Reveal><section className="work-proof"><div className="shell"><article><CheckCircle2/><h3>Responsive behavior</h3><p>Designed for the screens customers actually use.</p></article><article><CheckCircle2/><h3>Business-side control</h3><p>Content and admin needs considered alongside the public experience.</p></article><article><CheckCircle2/><h3>Clean deployment</h3><p>Launch, ownership and handoff treated as part of the work.</p></article></div></section></Reveal>

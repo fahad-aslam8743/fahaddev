@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ArrowRight, Check, Gauge, ShieldCheck, Settings2, TrendingUp, Workflow, MousePointerClick, BadgeCheck, Headphones, Rocket, SearchX, Smartphone, Repeat2, CircleDollarSign } from 'lucide-react';
 import { ProjectCard } from '@/components/ProjectCard';
-import { featuredProjects } from '@/lib/projects';
+import { getFeaturedProjects } from '@/lib/projects';
 import { services } from '@/lib/services';
 import { HeroImage } from '@/components/HeroImage';
 import { StackSection } from '@/components/StackSection';
@@ -28,13 +28,13 @@ const faqs:FAQItem[]=[
  {q:'What is the best way to start?',a:'Send the current URL, idea or workflow plus the result you want. You can use the project brief on the contact page or message directly on WhatsApp.'},
 ];
 
-export default function Home(){return <>
+export default async function Home(){const featuredProjects=await getFeaturedProjects();return <>
 <section className="home-hero-wrap"><div className="shell hero">
   <Reveal className="hero-copy"><span className="eyebrow">Custom web development for growing businesses</span><h1>Custom web products that make it easier for customers to say yes — and easier for your team to operate.</h1><p className="lead">Websites, commerce systems, dashboards and full-stack apps built around conversion, clarity and clean ownership — not generic templates or disconnected pieces.</p><div className="hero-actions"><Link className="btn" href="/contact#project-brief">Get a Free Project Review <ArrowRight size={17}/></Link><Link className="btn btn-secondary" href="/work">Explore Selected Work</Link></div><p className="microproof"><Check size={15}/> No technical brief needed <span>·</span> Scope before commitment <span>·</span> Direct developer access</p></Reveal>
   <Reveal className="hero-media"><HeroImage kind="home"/></Reveal>
 </div></section>
 
-<section className="proof-ribbon"><div className="shell proof-ribbon-grid"><div><b>Built for mobile</b><span>Responsive paths that feel intentional on the screens customers actually use.</span></div><div><b>Built for action</b><span>Hierarchy and calls to action shaped around the next useful decision.</span></div><div><b>Built as a system</b><span>Interface, data, content and deployment planned together.</span></div><div><b>Built to hand over</b><span>Ownership stays clear after launch.</span></div></div></section>
+<section className="proof-ribbon"><div className="shell proof-ribbon-grid"><article><Smartphone/><div><b>Built for mobile</b><span>Responsive paths that feel intentional on the screens customers actually use.</span></div></article><article><MousePointerClick/><div><b>Built for action</b><span>Hierarchy and calls to action shaped around the next useful decision.</span></div></article><article><Workflow/><div><b>Built as a system</b><span>Interface, data, content and deployment planned together.</span></div></article><article><ShieldCheck/><div><b>Built to hand over</b><span>Ownership stays clear after launch.</span></div></article></div></section>
 
 <Reveal><section className="section shell pain-section"><div className="section-head centered"><span className="eyebrow">What usually brings a client here</span><h2>You are probably not looking for “more code.” You are trying to remove a business problem.</h2><p>The strongest projects start when the cost of friction is clearer than the feature list.</p></div><div className="pain-grid"><article><SearchX/><h3>The website looks fine, but people still hesitate</h3><p>The offer, proof or next action is not clear enough to turn attention into confidence.</p></article><article><Smartphone/><h3>Mobile feels like a smaller desktop</h3><p>Important content, navigation or forms become awkward on the screens customers use most.</p></article><article><Repeat2/><h3>Your team repeats work the product should handle</h3><p>Admin tasks, data entry or disconnected tools are consuming time and creating avoidable mistakes.</p></article><article><CircleDollarSign/><h3>A rebuild feels expensive — but doing nothing is expensive too</h3><p>The right answer may be a focused improvement, not a bigger project than you actually need.</p></article></div></section></Reveal>
 

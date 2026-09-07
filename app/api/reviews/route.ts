@@ -1,11 +1,10 @@
 import {NextResponse} from 'next/server';
-import {revalidatePath} from 'next/cache';
 import {supabaseAdmin} from '@/lib/supabase';
 
 export async function GET(){
   const sb=supabaseAdmin();
   if(!sb)return NextResponse.json([]);
-  const {data,error}=await sb.from('reviews').select('id,name,role,company,rating,message,created_at').order('created_at',{ascending:false}).limit(50);
+  const {data,error}=await sb.from('reviews').select('id,name,role,company,rating,message,created_at').eq('status','approved').order('approved_at',{ascending:false,nullsFirst:false}).order('created_at',{ascending:false}).limit(50);
   if(error)return NextResponse.json({error:'Could not load reviews right now.'},{status:500});
   return NextResponse.json(data,{headers:{'Cache-Control':'no-store'}});
 }
@@ -22,8 +21,7 @@ export async function POST(req:Request){
   const company=String(body.company||'').trim().slice(0,100);
   const rating=Math.max(1,Math.min(5,Number(body.rating)||5));
   if(name.length<2||message.length<12)return NextResponse.json({error:'Please add your name and a little more detail.'},{status:400});
-  const {data,error}=await sb.from('reviews').insert({name,message,role:role||null,company:company||null,rating}).select('id').single();
-  if(error)return NextResponse.json({error:'Could not publish the review right now.'},{status:500});
-  revalidatePath('/');
-  return NextResponse.json({id:data.id,ok:true},{status:201});
+  const {data,error}=await sb.from('reviews').insert({name,message,role:role||null,company:company||null,rating,status:'pending',approved_at:null}).select('id').single();
+  if(error)return NextResponse.json({error:'Could not submit the review right now.'},{status:500});
+  return NextResponse.json({id:data.id,ok:true,status:'pending'},{status:201});
 }

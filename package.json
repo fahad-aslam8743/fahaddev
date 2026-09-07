@@ -1,6 +1,6 @@
 {
-  "name": "fahaddev-v7-conversion-seo",
-  "version": "1.0.0",
+  "name": "fahaddev-v9-admin-cms-moderation",
+  "version": "9.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

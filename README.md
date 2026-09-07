@@ -1,45 +1,53 @@
-# FahadDev v8 — Conversion, Lead Capture, Responsive UX & SEO Rebuild
+# FahadDev v9 — Moderated Reviews, Portfolio CMS & Visual Polish
 
-This version turns the site from a portfolio-first presentation into a clearer client-acquisition funnel while preserving the requested design rule: **centered hierarchy on desktop, left-aligned reading flow on mobile**.
+This version builds on the CEO/conversion rebuild and adds a real content-management workflow for the two trust surfaces that matter most: **client reviews and portfolio work**. The design rule remains unchanged: **centered hierarchy on desktop, left-aligned reading flow on mobile**.
 
-## Funnel and UX changes
-- Homepage now moves through: outcome-led hero → trust ribbon → client problem recognition → service self-selection → benefits → proof → delivery/value → stack → relevant experience → risk reduction → process → real reviews → FAQs → final CTA.
-- Added dedicated service pages for:
-  - `/services/ecommerce-development`
-  - `/services/dashboard-development`
-  - `/services/full-stack-web-app-development`
-  - `/services/website-improvements`
-- FAQ sections are now centered on desktop with questions directly below, while remaining left-aligned on mobile.
-- About page “More than implementation” introduction is centered on desktop and left-aligned on mobile.
-- Added a mobile lead bar after scroll with Project Brief and WhatsApp actions; it is intentionally hidden on Contact, Privacy and Admin.
-- Added active navigation states and stronger internal linking in the footer.
-- Contact page now explains what happens after a prospect messages, reducing uncertainty before the form.
-- Removed the fragile `mailto:` project form and replaced it with on-site lead capture.
-- Added project leads to the private admin dashboard with statuses: `new`, `contacted`, `qualified`, `won`, `closed`.
-- Contact form includes WhatsApp/email fallback when the lead API is unavailable.
-- Removed fabricated fallback testimonial content. Empty review states now stay truthful.
-- Concept portfolio work is explicitly labeled as concept work.
-- Added Youth Senate of Pakistan to Work so real organization experience is not hidden behind concept projects.
-- Removed the dead “New Project” admin screen; portfolio case studies are code-managed in this build.
+## What changed in v9
 
-## SEO changes
-- Unique canonical metadata and social images retained/enhanced across public pages.
-- Added four dedicated service landing pages with unique copy, metadata, internal links, Service JSON-LD and BreadcrumbList JSON-LD.
-- Added BreadcrumbList structured data to case studies.
-- Removed obsolete FAQ rich-result JSON-LD. Google stopped showing FAQ rich results in May 2026 and removed the documentation in August 2026.
-- Removed generic meta-keyword stuffing from root metadata.
-- Sitemap now includes all service and case-study routes and avoids inaccurate always-current `lastModified` values.
-- Robots now exclude all `/api/` and `/admin/` routes from crawling.
-- Page-specific hero artwork is used for Open Graph/Twitter metadata where available.
-- Footer now adds descriptive internal links to each core service page.
-- Fixed root social metadata that referenced missing image files and added a real `manifest.webmanifest`.
-- Added a concise `/privacy` route for contact/review data handling.
-- Review create/edit/delete now revalidates the homepage so public feedback is not trapped behind a stale pre-rendered cache.
+### Review moderation
+- Public review submissions are now saved as **pending**.
+- Pending reviews never render on the public homepage.
+- `/admin/dashboard` shows pending and published counts plus filters.
+- Admin can edit the reviewer name, company, role, review copy and rating.
+- **Approve & publish** makes a pending review public and refreshes the homepage.
+- **Unpublish** hides a review without deleting it.
+- **Delete** permanently removes it.
+- Existing v8 reviews are migrated to `approved` when `supabase-setup.sql` is rerun, so real existing feedback is not accidentally hidden.
 
-## Lead database setup
-Run `supabase-setup.sql` once in the Supabase SQL Editor. It creates both `reviews` and `leads` tables.
+### Functional portfolio admin
+- Projects are no longer locked inside `lib/projects.ts` after database setup.
+- Admin now has **Add new work**.
+- Every work item can be expanded and edited in place.
+- Editable fields include title, slug, type, timeline label, display order, live URL, stack, concept flag, publish state, summary, problem, approach, build and result.
+- Projects can be deleted from Admin.
+- New or hidden work can be published/unpublished without deleting it.
+- Existing Youth Senate, ÉLITES, Pulse and Loom Studio projects are seeded into Supabase so they are immediately editable after setup.
 
-Environment variables:
+### Project image management
+- Admin accepts JPG, PNG or WebP project screenshots up to 4 MB.
+- Images are uploaded server-side to a public Supabase Storage bucket named `project-images`.
+- One uploaded project image automatically appears on:
+  - homepage Featured Work
+  - Work page project card
+  - individual case-study hero
+- Replacing/deleting a project also cleans up the previous stored image when possible.
+
+### Visual polish
+- Rebuilt the homepage “Built for mobile / Built for action / Built as a system / Built to hand over” strip as a lighter premium promise rail with consistent icon blocks.
+- Rebuilt the stack section into equal tool tiles with controlled icon sizing, spacing and alignment instead of loose logo chips.
+- Added polished project-image overlays and case-study image treatment.
+- Upgraded Admin from a basic table into an operational dashboard with overview metrics, moderation states, filters, expandable portfolio editors and upload previews.
+
+## Supabase setup — required once after upgrading
+Run `supabase-setup.sql` in the Supabase SQL Editor. It is written to be safe to run again and will:
+1. upgrade reviews with `pending` / `approved` moderation fields;
+2. preserve existing reviews as approved;
+3. keep the leads table;
+4. create the editable `projects` table;
+5. seed the four existing portfolio projects if they are missing;
+6. create/update the public `project-images` Storage bucket.
+
+Environment variables stay the same:
 ```text
 NEXT_PUBLIC_SITE_URL=https://fahaddev.com
 NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
@@ -50,27 +58,29 @@ ADMIN_PASSWORD=
 
 Never expose `SUPABASE_SERVICE_ROLE_KEY` in browser/client code.
 
-## Security / dependency note
-- Project remains on Next.js `15.5.25`, above the August 2026 maintenance security release floor (`15.5.24`).
-- React / React DOM are updated to `19.1.8`, the latest published 19.1 line listed by React as of this audit.
-- Admin login uses constant-time password comparison and an HTTP-only session cookie.
-- Public forms use server-side length/format validation and honeypot fields.
-- Production responses add HSTS and a Content Security Policy; development mode avoids CSP so Next.js HMR is not broken.
-
 ## Validation completed in this workspace
-- TypeScript/TSX syntax-transpile validation: **49 files, 0 syntax errors**.
-- Internal route/link inventory: **no suspicious broken internal links found**.
-- CSS brace balance: **0**.
-- FAQ rich-result schema references: **0**.
+- TypeScript/TSX syntax-transpile validation: **53 files, 0 syntax errors**.
+- CSS braces: balanced.
+- Known public routes: **15**, with dynamic project routes enabled for new Admin-created work.
+- Broken literal internal links found: **0**.
+- Critical feature audit passed for:
+  - pending review inserts
+  - approved-only public reviews
+  - project CRUD API
+  - project-image upload API
+  - Admin Add/Edit/Delete UI
+  - Supabase Storage setup
+  - project images on cards
+  - project images on case studies
 
-A full `next build` could not be executed in this workspace because npm registry access returned `EAI_AGAIN`; run `npm install && npm run build` in your normal environment or Vercel before production promotion.
+A complete `next build` could not be executed here because dependency installation timed out in this environment. Run `npm install && npm run build` locally or let Vercel run the production build before promotion.
 
 ## Launch checklist
-1. Run `supabase-setup.sql`.
-2. Add the environment variables above in Vercel.
-3. Run `npm install` and `npm run build`.
-4. Test Home, Services, all four service pages, Work, all case studies, Process, About, Contact and Privacy on desktop/mobile.
-5. Submit `https://fahaddev.com/sitemap.xml` in Google Search Console.
-6. Inspect the Home, Services, Work and Contact URLs in Search Console after production deployment.
-7. Test one real project brief submission and confirm it appears under `/admin/dashboard`.
-8. Test review posting/edit/delete before sharing the review feature publicly.
+1. Run the new `supabase-setup.sql` once.
+2. Confirm the existing four projects appear under `/admin/dashboard`.
+3. Upload one project screenshot and verify it appears on Home, Work and its case-study page.
+4. Submit one public review and confirm it appears as **Pending** in Admin but not on Home.
+5. Approve the review and confirm it appears publicly.
+6. Unpublish it and confirm it disappears without being deleted.
+7. Add a temporary new project, publish it, verify its route, then delete it.
+8. Run `npm install && npm run build` before production deployment.

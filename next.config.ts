@@ -9,14 +9,14 @@ const baseHeaders=[
 
 const productionHeaders=[
   {key:'Strict-Transport-Security',value:'max-age=31536000'},
-  {key:'Content-Security-Policy',value:"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://cdn.simpleicons.org; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"},
+  {key:'Content-Security-Policy',value:"default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://cdn.simpleicons.org https://*.supabase.co; font-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"},
 ];
 
 const nextConfig:NextConfig={
   reactStrictMode:true,
   poweredByHeader:false,
   compress:true,
-  images:{formats:['image/avif','image/webp']},
+  images:{formats:['image/avif','image/webp'],remotePatterns:[{protocol:'https',hostname:'**.supabase.co',pathname:'/storage/v1/object/public/**'}]},
   async headers(){
     return [{source:'/:path*',headers:[...baseHeaders,...(process.env.NODE_ENV==='production'?productionHeaders:[])]}];
   },

@@ -109,3 +109,17 @@ Every major section should answer at least one of these buyer questions:
 6. Am I going to be pushed into a bigger project than I need?
 
 If a section answers none of those questions, it is decoration and should be challenged.
+
+# v9 Follow-up — Trust Moderation + Portfolio Operations
+
+## Review workflow corrected
+The prior public form published reviews immediately. v9 changes the trust model: every submission is private until reviewed by the site owner. Admin can edit, approve, unpublish and delete feedback. Only rows with `status='approved'` are read by the public testimonial component.
+
+## Work management moved into Admin
+The previous dashboard only listed code-managed projects. v9 adds a Supabase-backed project CMS with full add/edit/delete/publish/reorder controls. Existing portfolio entries are seeded during the database upgrade so they do not need to be recreated manually.
+
+## Screenshot propagation
+Project screenshots are uploaded once to Supabase Storage and referenced by the shared project record. The same image therefore follows the project automatically across Featured Work, the Work index and the case-study hero.
+
+## Visual corrections
+The dark homepage build-principles ribbon was replaced with a lighter trust rail to better match the rest of the desktop composition, while mobile remains left aligned. The technology section now uses equal logo tiles with a fixed visual rhythm instead of variable-width chips.
