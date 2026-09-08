@@ -1,66 +1,53 @@
-# FahadDev v14.2 — Final Funnel & Responsive Polish
+# FahadDev v14.3 — Focused Home Funnel
 
-This release keeps the v13/v14 White Studio direction and all working business/admin systems, while correcting the final responsive and motion issues reported during review.
+This release simplifies the homepage around what a prospective client needs to understand before contacting FahadDev.
 
-## What changed
+## New homepage order
 
-- Desktop Contact link restored in the rounded navbar.
-- Primary nav spacing tightened carefully so Contact and the main `Start Project` action can coexist without crowding.
-- Desktop and laptop heroes keep copy on the left and the live product visual on the right.
-- Hero copy/visual gutter increased substantially to restore breathing room.
-- Laptop hero heading size is reduced slightly so the composition stays premium rather than compressed.
-- Service-detail and case-study heroes receive the same spacing treatment.
-- Process hero stage titles stay above the timeline on desktop and mobile.
-- Timeline dots are positioned directly on the connector line using stable absolute geometry rather than margin tricks.
-- Reveal sections trigger well before entering the viewport and complete in ~220ms.
-- Nested card stagger delays were removed so content no longer appears to wait after its section is already visible.
-- Route-entry motion was shortened while the scroll-to-top behavior remains intact.
-- Home's four project-type controls remain one row on mobile with no horizontal scrollbar.
+1. Hero
+2. Everything your website needs to launch
+3. Pain points worth fixing
+4. What actually gets implemented (interactive project-type showcase)
+5. Selected work / proof
+6. Moderated client reviews
+7. Focused FAQs
+8. Final project CTA
 
-## Funnel structure retained
+## What was removed from Home
 
-The site remains a hybrid funnel: Home answers the majority of buyer questions in one scroll, while service-detail pages and case studies provide deeper proof and SEO landing destinations.
+The following repetitive sections were removed from the homepage:
+- proof ribbon
+- separate service-card wall
+- duplicate investment/benefit grid
+- value band
+- standalone technology stack section
+- partner/logo section
+- risk-reduction card section
+- scroll-linked homepage process story
 
-The working conversion/admin systems remain unchanged:
+The dedicated Services and Process pages remain available for visitors who want deeper detail and for search intent.
 
-- Lead capture stored in Supabase.
-- Phone / WhatsApp capture.
-- Gmail, WhatsApp and Call reply actions in Admin.
-- Lead pipeline statuses.
-- Moderated reviews: pending, approve, edit, unpublish and delete.
-- Projects CMS: add, edit, publish/hide, reorder and delete.
-- Project screenshot upload via Supabase Storage.
-- Project images reused across Home, Work and case studies.
-- Dedicated service pages, sitemap, robots, metadata and privacy page.
+## New launch-benefits section
 
-## Supabase
+Immediately after the hero, the site now explains the practical pieces a project can include:
+- conversion-focused page structure
+- mobile-first responsive experience
+- CMS / admin control
+- lead capture and business actions
+- data, authentication and payments when required
+- SEO, performance, security, deployment and clean ownership
 
-No new database migration is required if v10+ is already working.
+Each item explains both the implementation and what the client receives from it.
 
-If your database predates phone capture, run once:
+## Database
 
-```sql
-alter table public.leads
-add column if not exists phone text;
-```
+No Supabase migration is required when upgrading from v14.2 / v10-compatible database setup.
 
-## Environment variables
+## Validation
 
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-ADMIN_PASSWORD=choose_a_private_admin_password
-NEXT_PUBLIC_SITE_URL=https://your-production-domain.com
-```
-
-Never expose `SUPABASE_SERVICE_ROLE_KEY` in browser/client code.
-
-## Local / production check
-
-```bash
-npm install
-npm run build
-npm run dev
-```
-
-The package received a deterministic source audit for TS/TSX parsing, routes, internal links, local assets, CSS structure and the critical funnel/admin paths. The complete Next.js production build still requires installed project dependencies, so Vercel or a local `npm install && npm run build` remains the final compiler/runtime check.
+- 54 TS/TSX files transpile with 0 syntax diagnostics
+- 17 known routes accounted for
+- 34 literal internal links checked
+- 0 unresolved literal internal links
+- 0 missing local imports
+- CSS brace balance clean

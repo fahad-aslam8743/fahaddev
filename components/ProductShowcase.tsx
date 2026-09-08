@@ -26,7 +26,7 @@ export function ProductShowcase(){
   const current=modes.find(x=>x.id===mode)!;
   return <section className="section live-scope-section">
     <div className="shell">
-      <div className="section-head centered live-scope-head"><span className="eyebrow">See what you would actually get</span><h2>Change the project type. Watch the product and delivery scope change with it.</h2><p>No vague “we build digital experiences.” Pick the problem and see the customer-facing result plus the system behind it.</p></div>
+      <div className="section-head centered live-scope-head"><span className="eyebrow">What actually gets implemented</span><h2>Choose the project type. See the customer-facing experience and the business features behind it.</h2><p>This is where the build becomes concrete: interface, admin control, data, workflow and the next action the product needs to support.</p></div>
       <div className="scope-switcher" role="tablist" aria-label="Project types">
         {modes.map(x=><button key={x.id} type="button" role="tab" aria-selected={mode===x.id} className={mode===x.id?'active':''} onClick={()=>setMode(x.id)}>{x.label}</button>)}
       </div>

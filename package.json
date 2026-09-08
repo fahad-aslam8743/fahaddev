@@ -1,6 +1,6 @@
 {
-  "name": "fahaddev-v14-2-final-funnel-polish",
-  "version": "14.2.0",
+  "name": "fahaddev-v14-3-focused-home-funnel",
+  "version": "14.3.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -1,64 +1,235 @@
 import Link from 'next/link';
-import { ArrowRight, Check, Gauge, ShieldCheck, Settings2, TrendingUp, Workflow, MousePointerClick, BadgeCheck, Headphones, Rocket, SearchX, Smartphone, Repeat2, CircleDollarSign } from 'lucide-react';
+import {
+  ArrowRight,
+  Check,
+  CircleDollarSign,
+  CreditCard,
+  LayoutDashboard,
+  MessageSquareMore,
+  SearchCheck,
+  SearchX,
+  Settings2,
+  Smartphone,
+  Repeat2,
+} from 'lucide-react';
 import { ProjectCard } from '@/components/ProjectCard';
 import { getFeaturedProjects } from '@/lib/projects';
-import { services } from '@/lib/services';
 import { HeroSystem } from '@/components/HeroSystem';
-import { StackSection } from '@/components/StackSection';
 import { ProductShowcase } from '@/components/ProductShowcase';
-import { BuildStory } from '@/components/BuildStory';
-import { Partners } from '@/components/Partners';
 import { Testimonials } from '@/components/Testimonials';
 import { Reveal } from '@/components/Reveal';
 import { FAQSection, FAQItem } from '@/components/FAQSection';
 import { pageMetadata } from '@/lib/seo';
 
-export const metadata=pageMetadata({title:'Custom Web Development for Growing Businesses',description:'Conversion-focused websites, e-commerce systems, dashboards and full-stack web apps built around customer action, operational clarity and clean ownership.',path:'/',image:'/opengraph-image.png'});
+export const metadata = pageMetadata({
+  title: 'Custom Web Development for Growing Businesses',
+  description:
+    'Conversion-focused websites, e-commerce systems, dashboards and full-stack web apps with the design, CMS, data, payments, SEO and deployment connected from the start.',
+  path: '/',
+  image: '/opengraph-image.png',
+});
 
-const faqs:FAQItem[]=[
- {q:'What kinds of projects are a good fit?',a:'Custom business websites, e-commerce experiences, dashboards, internal tools and full-stack web apps are the strongest fit. Focused improvements to an existing product can also make sense when the problem is clear.'},
- {q:'Do I need a technical specification before contacting you?',a:'No. A useful starting point is the business goal, what is not working today, who uses the product and what a good result would look like. The technical route can be shaped from there.'},
- {q:'Can you improve an existing website instead of rebuilding it?',a:'Yes. If the current product has a solid foundation, a focused performance, UX, conversion or feature pass can be more sensible than a rebuild. The first step is identifying whether the current system is worth keeping.'},
- {q:'Can you handle both front end and back end?',a:'Yes. Projects can include interface work, authentication, database design, APIs, CMS, payments, admin flows, deployment and handoff, depending on what the product needs.'},
- {q:'Will the site work properly on mobile?',a:'Mobile behavior is treated as a core product surface, not a late adjustment. Layout, tap targets, forms, overflow, performance and key customer paths are checked across responsive sizes.'},
- {q:'Will I be able to update content myself?',a:'When the project needs editable content, a CMS or suitable admin flow can be included so normal business updates do not require changing code.'},
- {q:'Who owns the code and accounts after launch?',a:'The goal is clean ownership. Source code, deployment access, domains, data services and other project accounts should remain clear and transferable rather than creating avoidable lock-in.'},
- {q:'How long does a project take?',a:'It depends on scope, risk and urgency. A focused fix can move quickly; a larger system needs more discovery, testing and review. I do not force every job into the same artificial timeline.'},
- {q:'How is pricing handled?',a:'Scope and priorities are clarified before a project price is agreed. If the brief changes materially, the impact is discussed before additional work is assumed.'},
- {q:'Do you provide support after launch?',a:'Launch-related issues can be handled during the agreed support window, and ongoing improvements can be scoped separately when a product needs continued work.'},
- {q:'Can you work with an existing designer or team?',a:'Yes. The build can start from existing designs, brand systems or product requirements, and can also integrate with another team when responsibilities are clear.'},
- {q:'What is the best way to start?',a:'Send the current URL, idea or workflow plus the result you want. You can use the project brief on the contact page or message directly on WhatsApp.'},
+const faqs: FAQItem[] = [
+  {
+    q: 'What kinds of projects are a good fit?',
+    a: 'Custom business websites, e-commerce experiences, dashboards, internal tools and full-stack web apps are the strongest fit. Focused improvements to an existing product can also make sense when the problem is clear.',
+  },
+  {
+    q: 'Do I need a technical specification before contacting you?',
+    a: 'No. Start with the business goal, what is not working today, who uses the product and what a good result would look like. The technical route can be shaped from there.',
+  },
+  {
+    q: 'Can you improve an existing website instead of rebuilding it?',
+    a: 'Yes. If the current product has a useful foundation, a focused performance, UX, conversion or feature pass can be more sensible than a rebuild.',
+  },
+  {
+    q: 'Can you handle the CMS, database, auth and payments too?',
+    a: 'Yes. The build can include content management, authentication, database design, APIs, payments, admin flows and deployment when the product needs them.',
+  },
+  {
+    q: 'Will the site work properly on mobile?',
+    a: 'Mobile is treated as a core product surface. Layout, navigation, tap targets, forms, overflow, performance and the main customer path are checked across responsive sizes.',
+  },
+  {
+    q: 'Will I be able to update the site myself?',
+    a: 'When editable content is part of the project, a CMS or admin flow can be included so normal business updates do not require code changes.',
+  },
+  {
+    q: 'Who owns the code and accounts after launch?',
+    a: 'Ownership stays clear. Source code, deployment access, domain, data services and the relevant project accounts are structured so the product is not trapped inside one developer account.',
+  },
+  {
+    q: 'What is the best way to start?',
+    a: 'Send the current URL, idea or workflow plus the result you want. I will help identify whether you need a focused improvement, a staged build or a complete system.',
+  },
 ];
 
-export default async function Home(){const featuredProjects=await getFeaturedProjects();return <>
-<section className="home-hero-wrap"><div className="shell hero">
-  <Reveal className="hero-copy"><span className="eyebrow">Custom web development for growing businesses</span><h1>Build the website your customers understand — and the system your business can grow on.</h1><p className="lead">Custom websites, e-commerce, dashboards and web apps with the design, CMS, data, payments, admin and deployment connected from the start.</p><div className="hero-actions"><Link className="btn" href="/contact">Get a Free Project Review <ArrowRight size={17}/></Link><Link className="btn btn-secondary" href="/work">Explore Selected Work</Link></div><p className="microproof"><Check size={15}/> No technical brief needed <span>·</span> Scope before commitment <span>·</span> Direct developer access</p></Reveal>
-  <Reveal className="hero-media"><HeroSystem kind="home" imageUrl={featuredProjects[0]?.imageUrl} context={featuredProjects[0]?.imageUrl?featuredProjects[0]?.title:undefined}/></Reveal>
-</div></section>
+const launchItems = [
+  {
+    Icon: LayoutDashboard,
+    title: 'Pages built to guide action',
+    text: 'Clear hierarchy, strong calls to action, trust sections and page structure built around what the visitor should understand and do next.',
+    gets: 'A website that explains the offer quickly instead of making customers hunt for the point.',
+  },
+  {
+    Icon: Smartphone,
+    title: 'Mobile-first experience',
+    text: 'Navigation, layouts, forms, cards and interactions are designed for real phone widths instead of being squeezed down from desktop.',
+    gets: 'A customer journey that still feels intentional on the device most people actually use.',
+  },
+  {
+    Icon: Settings2,
+    title: 'CMS or admin control',
+    text: 'Products, pages, projects, reviews, leads or other business content can be made editable when your workflow needs it.',
+    gets: 'Your team can handle normal updates without asking a developer for every small change.',
+  },
+  {
+    Icon: MessageSquareMore,
+    title: 'Lead capture & business actions',
+    text: 'Contact forms, email, WhatsApp, calls and the next-step flow are connected so interest does not end at a decorative form.',
+    gets: 'A clear path from visitor interest to a lead you can actually follow up with.',
+  },
+  {
+    Icon: CreditCard,
+    title: 'Data, auth & payments when needed',
+    text: 'Database structure, sign-in, permissions, checkout, orders and customer data are connected to the interface instead of bolted on later.',
+    gets: 'A real working product behind the polished front end.',
+  },
+  {
+    Icon: SearchCheck,
+    title: 'SEO, speed, security & launch',
+    text: 'Metadata, crawlable pages, responsive performance, sensible security, deployment, domain setup and ownership are considered before launch.',
+    gets: 'A production website that is ready to be found, used, managed and handed over cleanly.',
+  },
+];
 
-<ProductShowcase/>
+export default async function Home() {
+  const featuredProjects = await getFeaturedProjects();
+  return (
+    <>
+      <section className="home-hero-wrap">
+        <div className="shell hero">
+          <Reveal className="hero-copy">
+            <span className="eyebrow">Custom web development for growing businesses</span>
+            <h1>Build the website your customers understand — and the system your business can grow on.</h1>
+            <p className="lead">
+              Custom websites, e-commerce, dashboards and web apps with the design, CMS, data, payments, admin and deployment connected from the start.
+            </p>
+            <div className="hero-actions">
+              <Link className="btn" href="/contact">
+                Get a Free Project Review <ArrowRight size={17} />
+              </Link>
+              <Link className="btn btn-secondary" href="/work">
+                Explore Selected Work
+              </Link>
+            </div>
+            <p className="microproof">
+              <Check size={15} /> No technical brief needed <span>·</span> Scope before commitment <span>·</span> Direct developer access
+            </p>
+          </Reveal>
+          <Reveal className="hero-media">
+            <HeroSystem
+              kind="home"
+              imageUrl={featuredProjects[0]?.imageUrl}
+              context={featuredProjects[0]?.imageUrl ? featuredProjects[0]?.title : undefined}
+            />
+          </Reveal>
+        </div>
+      </section>
 
-<section className="proof-ribbon"><div className="shell proof-ribbon-grid"><article><Smartphone/><div><b>Built for mobile</b><span>Responsive paths that feel intentional on the screens customers actually use.</span></div></article><article><MousePointerClick/><div><b>Built for action</b><span>Hierarchy and calls to action shaped around the next useful decision.</span></div></article><article><Workflow/><div><b>Built as a system</b><span>Interface, data, content and deployment planned together.</span></div></article><article><ShieldCheck/><div><b>Built to hand over</b><span>Ownership stays clear after launch.</span></div></article></div></section>
+      <Reveal>
+        <section className="section launch-benefits-section">
+          <div className="shell">
+            <div className="section-head centered launch-benefits-head">
+              <span className="eyebrow">Everything your website needs to launch</span>
+              <h2>Not just pages. The customer experience and the business system behind it.</h2>
+              <p>
+                The exact scope changes by project, but these are the pieces I think through so you do not end up with a beautiful front end and unfinished business infrastructure behind it.
+              </p>
+            </div>
+            <div className="launch-benefit-grid">
+              {launchItems.map(({ Icon, title, text, gets }) => (
+                <article key={title}>
+                  <div className="launch-benefit-icon"><Icon /></div>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{text}</p>
+                    <span><Check size={14} /> <b>You get:</b> {gets}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      </Reveal>
 
-<Reveal><section className="section shell pain-section"><div className="section-head centered"><span className="eyebrow">What usually brings a client here</span><h2>You are probably not looking for “more code.” You are trying to remove a business problem.</h2><p>The strongest projects start when the cost of friction is clearer than the feature list.</p></div><div className="pain-grid"><article><SearchX/><h3>The website looks fine, but people still hesitate</h3><p>The offer, proof or next action is not clear enough to turn attention into confidence.</p></article><article><Smartphone/><h3>Mobile feels like a smaller desktop</h3><p>Important content, navigation or forms become awkward on the screens customers use most.</p></article><article><Repeat2/><h3>Your team repeats work the product should handle</h3><p>Admin tasks, data entry or disconnected tools are consuming time and creating avoidable mistakes.</p></article><article><CircleDollarSign/><h3>A rebuild feels expensive — but doing nothing is expensive too</h3><p>The right answer may be a focused improvement, not a bigger project than you actually need.</p></article></div></section></Reveal>
+      <Reveal>
+        <section className="section shell pain-section">
+          <div className="section-head centered">
+            <span className="eyebrow">The problems worth fixing</span>
+            <h2>A website becomes expensive when customers hesitate or your team keeps working around it.</h2>
+            <p>These are the problems that usually create a real reason to improve the product.</p>
+          </div>
+          <div className="pain-grid">
+            <article>
+              <SearchX />
+              <h3>People visit, but the offer still feels unclear</h3>
+              <p>The message, proof or next action is not strong enough to turn attention into confidence.</p>
+            </article>
+            <article>
+              <Smartphone />
+              <h3>Mobile is costing you trust</h3>
+              <p>Navigation, forms or content become awkward on the screens customers use most.</p>
+            </article>
+            <article>
+              <Repeat2 />
+              <h3>Your team repeats work the product should handle</h3>
+              <p>Admin tasks, data entry and disconnected tools are consuming time and creating avoidable mistakes.</p>
+            </article>
+            <article>
+              <CircleDollarSign />
+              <h3>You need improvement, not an unnecessary rebuild</h3>
+              <p>If the foundation is useful, the smarter route can be a focused fix instead of replacing everything.</p>
+            </article>
+          </div>
+        </section>
+      </Reveal>
 
-<Reveal><section className="section alt"><div className="shell"><div className="section-head centered"><span className="eyebrow">What I can build or improve</span><h2>Choose the problem that sounds closest. The exact scope can come later.</h2><p>Each service has its own detailed page so you can judge fit before starting a conversation.</p></div><div className="home-service-grid">{services.map(({icon:Icon,...service})=><Link href={`/services/${service.slug}`} className="home-service-card" key={service.slug}><Icon/><span className="eyebrow">{service.eyebrow}</span><h3>{service.shortTitle}</h3><p>{service.hook}</p><b>Explore this service <ArrowRight size={16}/></b></Link>)}</div></div></section></Reveal>
+      <ProductShowcase />
 
-<Reveal><section className="section shell"><div className="section-head centered"><span className="eyebrow">What the investment should improve</span><h2>A better customer experience outside. Less friction inside.</h2><p>The product should create a business advantage, not just a nicer screenshot.</p></div><div className="benefit-grid"><article><MousePointerClick/><h3>Clearer conversion paths</h3><p>Reduce confusion between first visit, product understanding and the next action you want a customer to take.</p></article><article><Gauge/><h3>Faster real-world experience</h3><p>Responsive layouts and performance decisions designed for mobile networks and everyday devices.</p></article><article><Settings2/><h3>Smoother operations</h3><p>CMS, dashboards and admin flows that reduce repetitive work and keep updates closer to the team.</p></article><article><ShieldCheck/><h3>Cleaner ownership</h3><p>Source, data, deployment and project accounts structured so growth does not become a dependency trap.</p></article></div></section></Reveal>
+      <Reveal>
+        <section className="section alt selected-work-section">
+          <div className="shell">
+            <div className="section-head centered">
+              <span className="eyebrow">Proof before promises</span>
+              <h2>See how the work connects the interface to the system behind it.</h2>
+              <p>Real and concept projects are clearly labeled. Case studies focus on the problem, implementation and intended business result.</p>
+            </div>
+            <div className="project-grid">{featuredProjects.map((p) => <ProjectCard key={p.slug} p={p} />)}</div>
+            <div className="section-single-action">
+              <Link className="btn btn-secondary" href="/work">
+                View All Case Studies <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+        </section>
+      </Reveal>
 
-<Reveal><section className="section alt"><div className="shell"><div className="section-head centered"><span className="eyebrow">Selected work</span><h2>See the thinking behind the interface.</h2><p>Each case study is framed around the problem, the build and the outcome the product was designed to support.</p></div><div className="project-grid">{featuredProjects.map(p=><ProjectCard key={p.slug} p={p}/>)}</div><div className="section-single-action"><Link className="btn btn-secondary" href="/work">View All Case Studies <ArrowRight size={16}/></Link></div></div></section></Reveal>
+      <Testimonials />
+      <FAQSection items={faqs} title="Questions clients usually want answered before starting." />
 
-<Reveal><section className="section value-band"><div className="shell value-band-grid"><div><TrendingUp/><span>Customer</span><b>More confidence between first visit and next action.</b></div><div><Workflow/><span>Operations</span><b>Fewer manual steps and clearer information.</b></div><div><BadgeCheck/><span>Delivery</span><b>One owner across the connected product path.</b></div><div><Rocket/><span>Launch</span><b>A production release with handoff already considered.</b></div></div></section></Reveal>
-
-<StackSection/>
-<Partners/>
-
-<Reveal><section className="section shell"><div className="section-head centered"><span className="eyebrow">Risk reduction before development</span><h2>Good clients are not afraid of paying for useful work. They are afraid of paying for the wrong work.</h2><p>The process is designed to reduce that risk before a large commitment is made.</p></div><div className="reason-grid"><article><BadgeCheck/><span>01</span><h3>Smallest useful route first</h3><p>If a focused fix can solve the problem, I will not recommend a rebuild just to make the project larger.</p></article><article><TrendingUp/><span>02</span><h3>Scope before cost</h3><p>Pricing follows the actual deliverables, risk and responsibility rather than a vague package label.</p></article><article><Headphones/><span>03</span><h3>Direct communication</h3><p>Questions and feedback reach the person making product and implementation decisions.</p></article><article><ShieldCheck/><span>04</span><h3>No ownership trap</h3><p>Source, deployment and service accounts are planned so the product stays clear to hand over and operate.</p></article></div></section></Reveal>
-
-<BuildStory/>
-
-<Testimonials/>
-<FAQSection items={faqs}/>
-
-<section className="cta-band"><div className="shell cta-band-inner"><div><span className="eyebrow">Have a project in mind?</span><h2>Start with what needs to work better.</h2><p>Send the goal, current problem or existing URL. The first job is to identify the clearest practical route — not pressure you into the biggest build.</p></div><Link className="btn light-btn" href="/contact">Start a Project <ArrowRight size={17}/></Link></div></section>
-</>}
+      <section className="cta-band">
+        <div className="shell cta-band-inner">
+          <div>
+            <span className="eyebrow">Have a project in mind?</span>
+            <h2>Start with what needs to work better.</h2>
+            <p>Send the current URL, idea or workflow. I’ll help identify the clearest practical route before you commit to a bigger build.</p>
+          </div>
+          <Link className="btn light-btn" href="/contact">
+            Start a Project <ArrowRight size={17} />
+          </Link>
+        </div>
+      </section>
+    </>
+  );
+}

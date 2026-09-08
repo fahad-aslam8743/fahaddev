@@ -762,3 +762,32 @@ body{background:#fff;color:var(--studio-ink)}
   .studio-header .desktop-nav a{padding:7px 7px!important;font-size:.7rem!important}
   .studio-header .nav-cta{padding:9px 10px!important;font-size:.68rem!important}
 }
+
+/* v14.3 homepage funnel simplification -----------------------------------
+   Hero -> launch benefits -> pain -> implementation -> work -> concise delivery -> trust -> CTA.
+   Replaces repetitive proof/service/stack/process blocks with buyer-focused detail.
+*/
+.launch-benefits-section{padding-top:82px!important;background:linear-gradient(180deg,#f8fbff 0%,#fff 72%)!important;border-top:1px solid #edf1f5}
+.launch-benefits-head{max-width:880px!important}
+.launch-benefit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;max-width:1120px;margin-inline:auto}
+.launch-benefit-grid article{display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:start;padding:24px;border:1px solid #e1e7ef;border-radius:20px;background:rgba(255,255,255,.96);box-shadow:0 12px 34px rgba(20,35,58,.045)}
+.launch-benefit-icon{width:48px;height:48px;display:grid;place-items:center;border:1px solid #d8e5f5;border-radius:14px;background:#eef6ff;color:#1769c8}
+.launch-benefit-icon svg{width:22px;height:22px}
+.launch-benefit-grid h3{margin:1px 0 7px;font-size:1.02rem;letter-spacing:-.02em}
+.launch-benefit-grid p{margin:0;color:var(--body);font-size:.84rem;line-height:1.62}
+.launch-benefit-grid article>div:last-child>span{display:flex;align-items:flex-start;gap:6px;margin-top:13px;padding-top:12px;border-top:1px solid #edf1f5;color:#536071;font-size:.72rem;line-height:1.48}
+.launch-benefit-grid article>div:last-child>span svg{flex:0 0 auto;margin-top:2px;color:#1fa35b}
+.launch-benefit-grid article>div:last-child>span b{color:#18202b;white-space:nowrap}
+
+.selected-work-section{margin-top:0!important}
+
+@media(max-width:860px){
+  .launch-benefit-grid{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  .launch-benefits-section{padding-top:66px!important}
+  .launch-benefit-grid article{grid-template-columns:42px 1fr;gap:13px;padding:18px;border-radius:17px}
+  .launch-benefit-icon{width:42px;height:42px;border-radius:12px}
+  .launch-benefit-grid h3{font-size:.96rem}
+  .launch-benefit-grid p{font-size:.8rem}
+}
