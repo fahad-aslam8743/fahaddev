@@ -55,11 +55,21 @@ function ServicesScene({context}:{context?:string}){return <div className="studi
   <div className="service-flow-label"><span>Design</span><i/><span>Build</span><i/><span>Connect</span><i/><span>Ship</span></div>
 </div>}
 
-function ProcessScene(){return <div className="studio-scene process-scene">
-  <div className="process-live-line"><i/></div>
-  {['Understand','Shape','Build','Review','Launch'].map((x,i)=><div key={x} className={`process-live-step step-${i+1}`}><span>{String(i+1).padStart(2,'0')}</span><b>{x}</b><small>{i===0?'goal + friction':i===1?'scope + flows':i===2?'working slices':i===3?'test + refine':'deploy + handoff'}</small></div>)}
-  <div className="process-current"><Gauge/><span><small>Current principle</small><b>Important decisions stay visible.</b></span></div>
-</div>}
+function ProcessScene(){
+  const stages=[
+    ['Understand','goal + friction'],
+    ['Shape','scope + flows'],
+    ['Build','working slices'],
+    ['Verify','test + refine'],
+    ['Launch','deploy + handoff'],
+  ];
+  return <div className="studio-scene process-scene">
+    <div className="process-current"><Gauge/><span><small>Current principle</small><b>Important decisions stay visible.</b></span></div>
+    <div className="process-rail">
+      {stages.map(([label,detail],i)=><div key={label} className="process-rail-step"><div className="process-rail-label"><span>{String(i+1).padStart(2,'0')}</span><b>{label}</b></div><i className="process-rail-dot"/><small>{detail}</small></div>)}
+    </div>
+  </div>
+}
 
 function AboutScene(){return <div className="studio-scene about-scene">
   <div className="builder-card"><div className="builder-avatar">FA</div><div><small>FahadDev</small><strong>One person from product question to production.</strong></div></div>

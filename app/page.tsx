@@ -32,37 +32,25 @@ export const metadata = pageMetadata({
 const faqs: FAQItem[] = [
   {
     q: 'What kinds of projects are a good fit?',
-    a: 'Custom business websites, e-commerce experiences, dashboards, internal tools and full-stack web apps are the strongest fit. Focused improvements to an existing product can also make sense when the problem is clear.',
-  },
-  {
-    q: 'Do I need a technical specification before contacting you?',
-    a: 'No. Start with the business goal, what is not working today, who uses the product and what a good result would look like. The technical route can be shaped from there.',
+    a: 'Custom business websites, e-commerce, dashboards, internal tools and full-stack web apps are the strongest fit. Focused improvements also make sense when the problem is clear.',
   },
   {
     q: 'Can you improve an existing website instead of rebuilding it?',
-    a: 'Yes. If the current product has a useful foundation, a focused performance, UX, conversion or feature pass can be more sensible than a rebuild.',
+    a: 'Yes. If the foundation is useful, a focused performance, UX, conversion, responsive or feature pass can be smarter than replacing everything.',
   },
   {
-    q: 'Can you handle the CMS, database, auth and payments too?',
-    a: 'Yes. The build can include content management, authentication, database design, APIs, payments, admin flows and deployment when the product needs them.',
-  },
-  {
-    q: 'Will the site work properly on mobile?',
-    a: 'Mobile is treated as a core product surface. Layout, navigation, tap targets, forms, overflow, performance and the main customer path are checked across responsive sizes.',
+    q: 'Can you handle CMS, database, auth and payments too?',
+    a: 'Yes. Those pieces can be included when the product needs them so the interface and the business system are not treated as separate projects.',
   },
   {
     q: 'Will I be able to update the site myself?',
-    a: 'When editable content is part of the project, a CMS or admin flow can be included so normal business updates do not require code changes.',
-  },
-  {
-    q: 'Who owns the code and accounts after launch?',
-    a: 'Ownership stays clear. Source code, deployment access, domain, data services and the relevant project accounts are structured so the product is not trapped inside one developer account.',
+    a: 'When editable content belongs in the workflow, a CMS or admin flow can be included so normal business updates do not require code changes.',
   },
   {
     q: 'What is the best way to start?',
-    a: 'Send the current URL, idea or workflow plus the result you want. I will help identify whether you need a focused improvement, a staged build or a complete system.',
+    a: 'Send the current URL, idea or workflow plus the result you want. I will help identify whether you need a focused improvement, staged build or complete system.',
   },
-];
+]
 
 const launchItems = [
   {
@@ -111,7 +99,7 @@ export default async function Home() {
         <div className="shell hero">
           <Reveal className="hero-copy">
             <span className="eyebrow">Custom web development for growing businesses</span>
-            <h1>Build the website your customers understand — and the system your business can grow on.</h1>
+            <div className="hero-title-lockup"><h1>Build the website your customers understand — and the system your business can grow on.</h1><span className="hero-title-rule" aria-hidden="true"/></div>
             <p className="lead">
               Custom websites, e-commerce, dashboards and web apps with the design, CMS, data, payments, admin and deployment connected from the start.
             </p>

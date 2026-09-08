@@ -1,6 +1,6 @@
 {
-  "name": "fahaddev-v14-3-focused-home-funnel",
-  "version": "14.3.0",
+  "name": "fahaddev-v14-4-dream-engine",
+  "version": "14.4.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

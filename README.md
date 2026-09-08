@@ -1,53 +1,36 @@
-# FahadDev v14.3 — Focused Home Funnel
+# FahadDev v14.4 — Dream Engine
 
-This release simplifies the homepage around what a prospective client needs to understand before contacting FahadDev.
+A full-site buyer-focused refinement of v14.3.
 
-## New homepage order
+## What changed
 
-1. Hero
-2. Everything your website needs to launch
-3. Pain points worth fixing
-4. What actually gets implemented (interactive project-type showcase)
-5. Selected work / proof
-6. Moderated client reviews
-7. Focused FAQs
-8. Final project CTA
-
-## What was removed from Home
-
-The following repetitive sections were removed from the homepage:
-- proof ribbon
-- separate service-card wall
-- duplicate investment/benefit grid
-- value band
-- standalone technology stack section
-- partner/logo section
-- risk-reduction card section
-- scroll-linked homepage process story
-
-The dedicated Services and Process pages remain available for visitors who want deeper detail and for search intent.
-
-## New launch-benefits section
-
-Immediately after the hero, the site now explains the practical pieces a project can include:
-- conversion-focused page structure
-- mobile-first responsive experience
-- CMS / admin control
-- lead capture and business actions
-- data, authentication and payments when required
-- SEO, performance, security, deployment and clean ownership
-
-Each item explains both the implementation and what the client receives from it.
+- All public pages shortened to the content a serious buyer needs.
+- Home keeps the complete funnel; deeper pages now support rather than repeat it.
+- Home benefit and pain cards are mobile-safe and collapse before they become cramped.
+- Work cards use a stable visual ratio, two-column desktop gallery, and one-column mobile/tablet layout.
+- Process hero timeline rebuilt as one grid-based rail so labels stay above the line at every breakpoint.
+- Hero headlines keep the existing copy but gain a restrained visual lockup and signal line.
+- Services simplified to four buying paths + a focused-fix/full-build note.
+- Process simplified to five real delivery stages.
+- About simplified to role, relevant experience, working principles and FAQs.
+- Contact simplified to direct channels + project brief + three next steps.
+- Service detail pages simplified to outcomes + typical scope + FAQs.
+- Case studies simplified to challenge + what was built + result.
+- Reveal motion triggers earlier and finishes in ~0.18s.
 
 ## Database
 
-No Supabase migration is required when upgrading from v14.2 / v10-compatible database setup.
+No new Supabase migration is required if v10+ is already configured.
 
-## Validation
+## Production checklist
 
-- 54 TS/TSX files transpile with 0 syntax diagnostics
-- 17 known routes accounted for
-- 34 literal internal links checked
-- 0 unresolved literal internal links
-- 0 missing local imports
-- CSS brace balance clean
+1. Keep your existing environment variables.
+2. Run `npm install`.
+3. Run `npm run build`.
+4. Deploy to Vercel.
+5. Check Home, Work, Process and Contact at 360px, 390px, 768px, 1024px and desktop widths.
+6. Verify one lead submission, one review moderation flow, and one project image upload after deployment.
+
+## Important
+
+This environment could not complete npm dependency installation, so the full Next.js production build was not executed here. Source-level TS/TSX syntax, local imports, CSS balance and literal internal routes were checked.
