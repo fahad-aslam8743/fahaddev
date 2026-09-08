@@ -5,12 +5,12 @@ import { getFeaturedProjects } from '@/lib/projects';
 import { services } from '@/lib/services';
 import { HeroSystem } from '@/components/HeroSystem';
 import { StackSection } from '@/components/StackSection';
+import { ProductShowcase } from '@/components/ProductShowcase';
+import { BuildStory } from '@/components/BuildStory';
 import { Partners } from '@/components/Partners';
 import { Testimonials } from '@/components/Testimonials';
 import { Reveal } from '@/components/Reveal';
 import { FAQSection, FAQItem } from '@/components/FAQSection';
-import { KineticTicker } from '@/components/KineticTicker';
-import { CapabilitySwitcher } from '@/components/CapabilitySwitcher';
 import { pageMetadata } from '@/lib/seo';
 
 export const metadata=pageMetadata({title:'Custom Web Development for Growing Businesses',description:'Conversion-focused websites, e-commerce systems, dashboards and full-stack web apps built around customer action, operational clarity and clean ownership.',path:'/',image:'/opengraph-image.png'});
@@ -32,14 +32,13 @@ const faqs:FAQItem[]=[
 
 export default async function Home(){const featuredProjects=await getFeaturedProjects();return <>
 <section className="home-hero-wrap"><div className="shell hero">
-  <Reveal className="hero-copy"><span className="eyebrow hero-status"><i/>Independent full-stack builder · websites, systems & products</span><h1>Web products that feel <span className="kinetic-word">alive</span> — and make the next action obvious.</h1><p className="lead">Websites, commerce systems, dashboards and full-stack apps built around conversion, clarity and clean ownership — not generic templates or disconnected pieces.</p><div className="hero-actions"><Link className="btn" href="/contact#project-brief">Get a Free Project Review <ArrowRight size={17}/></Link><Link className="btn btn-secondary" href="/work">Explore Selected Work</Link></div><p className="microproof"><Check size={15}/> No technical brief needed <span>·</span> Scope before commitment <span>·</span> Direct developer access</p></Reveal>
+  <Reveal className="hero-copy"><span className="eyebrow">Custom web development for growing businesses</span><h1>Custom web products that make it easier for customers to say yes — and easier for your team to operate.</h1><p className="lead">Websites, commerce systems, dashboards and full-stack apps built around conversion, clarity and clean ownership — not generic templates or disconnected pieces.</p><div className="hero-actions"><Link className="btn" href="/contact#project-brief">Get a Free Project Review <ArrowRight size={17}/></Link><Link className="btn btn-secondary" href="/work">Explore Selected Work</Link></div><p className="microproof"><Check size={15}/> No technical brief needed <span>·</span> Scope before commitment <span>·</span> Direct developer access</p></Reveal>
   <Reveal className="hero-media"><HeroSystem kind="home"/></Reveal>
 </div></section>
-<KineticTicker/>
+
+<ProductShowcase/>
 
 <section className="proof-ribbon"><div className="shell proof-ribbon-grid"><article><Smartphone/><div><b>Built for mobile</b><span>Responsive paths that feel intentional on the screens customers actually use.</span></div></article><article><MousePointerClick/><div><b>Built for action</b><span>Hierarchy and calls to action shaped around the next useful decision.</span></div></article><article><Workflow/><div><b>Built as a system</b><span>Interface, data, content and deployment planned together.</span></div></article><article><ShieldCheck/><div><b>Built to hand over</b><span>Ownership stays clear after launch.</span></div></article></div></section>
-
-<CapabilitySwitcher/>
 
 <Reveal><section className="section shell pain-section"><div className="section-head centered"><span className="eyebrow">What usually brings a client here</span><h2>You are probably not looking for “more code.” You are trying to remove a business problem.</h2><p>The strongest projects start when the cost of friction is clearer than the feature list.</p></div><div className="pain-grid"><article><SearchX/><h3>The website looks fine, but people still hesitate</h3><p>The offer, proof or next action is not clear enough to turn attention into confidence.</p></article><article><Smartphone/><h3>Mobile feels like a smaller desktop</h3><p>Important content, navigation or forms become awkward on the screens customers use most.</p></article><article><Repeat2/><h3>Your team repeats work the product should handle</h3><p>Admin tasks, data entry or disconnected tools are consuming time and creating avoidable mistakes.</p></article><article><CircleDollarSign/><h3>A rebuild feels expensive — but doing nothing is expensive too</h3><p>The right answer may be a focused improvement, not a bigger project than you actually need.</p></article></div></section></Reveal>
 
@@ -56,7 +55,7 @@ export default async function Home(){const featuredProjects=await getFeaturedPro
 
 <Reveal><section className="section shell"><div className="section-head centered"><span className="eyebrow">Risk reduction before development</span><h2>Good clients are not afraid of paying for useful work. They are afraid of paying for the wrong work.</h2><p>The process is designed to reduce that risk before a large commitment is made.</p></div><div className="reason-grid"><article><BadgeCheck/><span>01</span><h3>Smallest useful route first</h3><p>If a focused fix can solve the problem, I will not recommend a rebuild just to make the project larger.</p></article><article><TrendingUp/><span>02</span><h3>Scope before cost</h3><p>Pricing follows the actual deliverables, risk and responsibility rather than a vague package label.</p></article><article><Headphones/><span>03</span><h3>Direct communication</h3><p>Questions and feedback reach the person making product and implementation decisions.</p></article><article><ShieldCheck/><span>04</span><h3>No ownership trap</h3><p>Source, deployment and service accounts are planned so the product stays clear to hand over and operate.</p></article></div></section></Reveal>
 
-<Reveal><section className="section alt"><div className="shell process-summary"><div className="section-head"><span className="eyebrow">Flexible delivery</span><h2>The process adapts to the job. The clarity does not.</h2><p>A quick technical fix and a full product build should not move at the same pace, but both should have a clear next step.</p></div><div className="steps"><article><span>01</span><b>Understand</b><p>Goal, users, constraints and urgency.</p></article><article><span>02</span><b>Shape</b><p>Scope, priorities and technical route.</p></article><article><span>03</span><b>Build & review</b><p>Working progress while changes are still cheap.</p></article><article><span>04</span><b>Launch & hand off</b><p>QA, deployment, access and ownership.</p></article></div></div></section></Reveal>
+<BuildStory/>
 
 <Testimonials/>
 <FAQSection items={faqs}/>

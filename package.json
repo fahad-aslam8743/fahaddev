@@ -1,6 +1,6 @@
 {
-  "name": "fahaddev-v11-live-dynamic-experience",
-  "version": "11.0.0",
+  "name": "fahaddev-v12-liquid-glass-professional",
+  "version": "12.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
