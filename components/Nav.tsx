@@ -1,7 +1,9 @@
 'use client';
+
 import Link from 'next/link';
 import { ArrowUpRight, Menu, MessageCircle, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import type { CSSProperties } from 'react';
 import { usePathname } from 'next/navigation';
 import { Logo } from './Logo';
 
@@ -18,21 +20,8 @@ export function Nav(){
   const [open,setOpen]=useState(false);
   const pathname=usePathname();
   const active=(href:string)=>href==='/'?pathname===href:pathname.startsWith(href);
-  useEffect(()=>{
-    if(!open) return;
-    const y=window.scrollY;
-    document.documentElement.classList.add('menu-open');
-    document.body.style.position='fixed';
-    document.body.style.top=`-${y}px`;
-    document.body.style.width='100%';
-    return()=>{
-      document.documentElement.classList.remove('menu-open');
-      document.body.style.position='';
-      document.body.style.top='';
-      document.body.style.width='';
-      window.scrollTo(0,y);
-    };
-  },[open]);
+
+  useEffect(()=>setOpen(false),[pathname]);
   useEffect(()=>{
     const onKey=(e:KeyboardEvent)=>{if(e.key==='Escape')setOpen(false)};
     window.addEventListener('keydown',onKey);
@@ -40,34 +29,33 @@ export function Nav(){
   },[]);
 
   return <>
-    <header className="site-header">
+    <header className={`site-header studio-header ${open?'menu-is-open':''}`}>
       <div className="shell nav-inner">
         <Logo/>
         <nav className="desktop-nav" aria-label="Primary navigation">
           {desktopLinks.map(([label,href])=><Link key={href} href={href} aria-current={active(href)?'page':undefined} className={active(href)?'active':''}>{label}</Link>)}
         </nav>
         <div className="nav-actions">
-          <Link className="nav-cta" href="/contact#project-brief">Start a Project <ArrowUpRight size={15}/></Link>
-          <button className="menu-toggle" onClick={()=>setOpen(true)} aria-label="Open navigation" aria-expanded={open}><Menu size={22}/></button>
+          <Link className="nav-cta" href="/contact">Start a Project <ArrowUpRight size={15}/></Link>
+          <button className="menu-toggle" onClick={()=>setOpen(v=>!v)} aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} aria-controls="mobile-navigation">{open?<X size={21}/>:<Menu size={21}/>}</button>
+        </div>
+      </div>
+      <div id="mobile-navigation" className={`mobile-dropdown ${open?'is-open':''}`} aria-hidden={!open}>
+        <nav className="mobile-dropdown-links" aria-label="Mobile navigation">
+          {mobileLinks.map(([label,href],i)=><Link
+            key={href}
+            href={href}
+            aria-current={active(href)?'page':undefined}
+            className={active(href)?'active':''}
+            style={{'--menu-delay':`${i*58}ms`} as CSSProperties}
+          ><span>{String(i+1).padStart(2,'0')}</span><strong>{label}</strong><ArrowUpRight size={18}/></Link>)}
+        </nav>
+        <div className="mobile-dropdown-footer" style={{'--menu-delay':`${mobileLinks.length*58}ms`} as CSSProperties}>
+          <div><small>Have something in mind?</small><b>Send the problem. I’ll help shape the route.</b></div>
+          <a href="https://wa.me/923255504461" target="_blank" rel="noreferrer"><MessageCircle size={17}/>WhatsApp</a>
         </div>
       </div>
     </header>
-    {open && <div className="menu-overlay" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-      <div className="menu-overlay-top shell"><Logo/><button className="menu-close" onClick={()=>setOpen(false)} aria-label="Close navigation"><X size={23}/></button></div>
-      <div className="menu-overlay-content shell">
-        <nav className="menu-overlay-links" aria-label="Mobile navigation">
-          {mobileLinks.map(([label,href],i)=><Link key={href} href={href} onClick={()=>setOpen(false)} aria-current={active(href)?'page':undefined} className={active(href)?'active':''}><span>0{i+1}</span><strong>{label}</strong><ArrowUpRight size={19}/></Link>)}
-        </nav>
-        <div className="menu-overlay-card">
-          <span className="eyebrow">Prefer a quick conversation?</span>
-          <h2>Tell me what needs to work better.</h2>
-          <p>No technical brief needed. Start with the problem and the outcome you want.</p>
-          <div className="menu-overlay-actions">
-            <Link className="btn" href="/contact#project-brief" onClick={()=>setOpen(false)}>Start a Project</Link>
-            <a className="btn btn-secondary" href="https://wa.me/923255504461" target="_blank" rel="noreferrer"><MessageCircle size={17}/>WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </div>}
+    {open&&<button className="mobile-menu-backdrop" aria-label="Close navigation" onClick={()=>setOpen(false)}/>} 
   </>;
 }

@@ -32,8 +32,8 @@ const faqs:FAQItem[]=[
 
 export default async function Home(){const featuredProjects=await getFeaturedProjects();return <>
 <section className="home-hero-wrap"><div className="shell hero">
-  <Reveal className="hero-copy"><span className="eyebrow">Custom web development for growing businesses</span><h1>Custom web products that make it easier for customers to say yes — and easier for your team to operate.</h1><p className="lead">Websites, commerce systems, dashboards and full-stack apps built around conversion, clarity and clean ownership — not generic templates or disconnected pieces.</p><div className="hero-actions"><Link className="btn" href="/contact#project-brief">Get a Free Project Review <ArrowRight size={17}/></Link><Link className="btn btn-secondary" href="/work">Explore Selected Work</Link></div><p className="microproof"><Check size={15}/> No technical brief needed <span>·</span> Scope before commitment <span>·</span> Direct developer access</p></Reveal>
-  <Reveal className="hero-media"><HeroSystem kind="home"/></Reveal>
+  <Reveal className="hero-copy"><span className="eyebrow">Custom web development for growing businesses</span><h1>Build the website your customers understand — and the system your business can grow on.</h1><p className="lead">Custom websites, e-commerce, dashboards and web apps with the design, CMS, data, payments, admin and deployment connected from the start.</p><div className="hero-actions"><Link className="btn" href="/contact">Get a Free Project Review <ArrowRight size={17}/></Link><Link className="btn btn-secondary" href="/work">Explore Selected Work</Link></div><p className="microproof"><Check size={15}/> No technical brief needed <span>·</span> Scope before commitment <span>·</span> Direct developer access</p></Reveal>
+  <Reveal className="hero-media"><HeroSystem kind="home" imageUrl={featuredProjects[0]?.imageUrl} context={featuredProjects[0]?.imageUrl?featuredProjects[0]?.title:undefined}/></Reveal>
 </div></section>
 
 <ProductShowcase/>
@@ -60,5 +60,5 @@ export default async function Home(){const featuredProjects=await getFeaturedPro
 <Testimonials/>
 <FAQSection items={faqs}/>
 
-<section className="cta-band"><div className="shell cta-band-inner"><div><span className="eyebrow">Have a project in mind?</span><h2>Start with what needs to work better.</h2><p>Send the goal, current problem or existing URL. The first job is to identify the clearest practical route — not pressure you into the biggest build.</p></div><Link className="btn light-btn" href="/contact#project-brief">Start a Project <ArrowRight size={17}/></Link></div></section>
+<section className="cta-band"><div className="shell cta-band-inner"><div><span className="eyebrow">Have a project in mind?</span><h2>Start with what needs to work better.</h2><p>Send the goal, current problem or existing URL. The first job is to identify the clearest practical route — not pressure you into the biggest build.</p></div><Link className="btn light-btn" href="/contact">Start a Project <ArrowRight size={17}/></Link></div></section>
 </>}

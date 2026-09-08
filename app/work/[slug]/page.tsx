@@ -31,7 +31,7 @@ export default async function CaseStudy({params}:{params:Promise<{slug:string}>}
     </div></section>
     <div className="shell case-body">
       <div className="case-content"><section><span>01</span><div><h2>The problem</h2><p>{p.problem}</p></div></section><section><span>02</span><div><h2>The approach</h2><p>{p.approach}</p></div></section><section><span>03</span><div><h2>The build</h2><p>{p.build}</p></div></section><section><span>04</span><div><h2>The result</h2><p>{p.result}</p></div></section></div>
-      <div className="case-cta"><div><span className="eyebrow">Have a similar challenge?</span><h2>Start with the business outcome, not a copied layout.</h2></div><Link className="btn" href="/contact#project-brief">Discuss Your Project</Link></div>
+      <div className="case-cta"><div><span className="eyebrow">Have a similar challenge?</span><h2>Start with the business outcome, not a copied layout.</h2></div><Link className="btn" href="/contact">Discuss Your Project</Link></div>
     </div>
   </article>
 }

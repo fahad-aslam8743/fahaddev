@@ -3,7 +3,7 @@ import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { HeroSystem } from './HeroSystem';
 import { Reveal } from './Reveal';
 
-type Kind='work'|'services'|'process'|'about'|'contact';
+type Kind='work'|'services'|'process'|'about'|'contact'|'privacy';
 type Action={label:string;href:string;external?:boolean};
 
 export function PageHero({kind,eyebrow,title,body,primary,secondary}:{kind:Kind;eyebrow:string;title:string;body:string;primary?:Action;secondary?:Action}){

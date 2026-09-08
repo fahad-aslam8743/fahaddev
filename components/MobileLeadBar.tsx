@@ -17,7 +17,7 @@ export function MobileLeadBar(){
   },[excluded]);
   if(!visible||excluded)return null;
   return <div className="mobile-lead-bar show" aria-label="Quick project contact">
-    <Link href="/contact#project-brief">Start a project</Link>
+    <Link href="/contact">Start a project</Link>
     <a href="https://wa.me/923255504461" target="_blank" rel="noreferrer"><MessageCircle size={17}/>WhatsApp</a>
   </div>;
 }
