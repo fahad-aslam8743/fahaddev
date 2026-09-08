@@ -6,7 +6,7 @@ import {FAQSection, FAQItem} from '@/components/FAQSection';
 import {services} from '@/lib/services';
 import {pageMetadata} from '@/lib/seo';
 
-export const metadata=pageMetadata({title:'Web Development Services for Growing Businesses',description:'Custom e-commerce, dashboards, web apps and focused product improvements built around conversion, operations and clean ownership.',path:'/services',image:'/heroes/services.png'});
+export const metadata=pageMetadata({title:'Web Development Services for Growing Businesses',description:'Custom e-commerce, dashboards, web apps and focused product improvements built around conversion, operations and clean ownership.',path:'/services',image:'/opengraph-image.png'});
 const faqs:FAQItem[]=[
  {q:'Do you only build complete websites from scratch?',a:'No. A focused improvement, feature addition, responsive fix, integration or performance pass can be the right project when the existing foundation is still useful.'},
  {q:'Can you build e-commerce without using a generic template?',a:'Yes. A custom front end can be combined with a CMS, payment system and order data so the buying experience can reflect the brand without losing operational control.'},

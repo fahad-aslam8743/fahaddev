@@ -7,7 +7,7 @@ import {Reveal} from '@/components/Reveal';
 import {FAQSection, FAQItem} from '@/components/FAQSection';
 import {pageMetadata} from '@/lib/seo';
 
-export const metadata=pageMetadata({title:'Web Development Work & Case Studies',description:'Selected commerce, dashboard and platform work showing the product problem, technical approach and business outcome behind each build.',path:'/work',image:'/heroes/work.png'});
+export const metadata=pageMetadata({title:'Web Development Work & Case Studies',description:'Selected commerce, dashboard and platform work showing the product problem, technical approach and business outcome behind each build.',path:'/work',image:'/opengraph-image.png'});
 const faqs:FAQItem[]=[
  {q:'Are all projects on this page paid client projects?',a:'No. Concept work is labeled clearly. The goal is to show product thinking and implementation quality without presenting concept work as client work.'},
  {q:'Can you build something different from these examples?',a:'Yes. The portfolio shows the kinds of systems and decisions I work with, not a fixed catalogue of layouts. A new project should be shaped around its own users, workflows and constraints.'},

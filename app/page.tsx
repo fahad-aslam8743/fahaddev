@@ -3,7 +3,7 @@ import { ArrowRight, Check, Gauge, ShieldCheck, Settings2, TrendingUp, Workflow,
 import { ProjectCard } from '@/components/ProjectCard';
 import { getFeaturedProjects } from '@/lib/projects';
 import { services } from '@/lib/services';
-import { HeroImage } from '@/components/HeroImage';
+import { HeroSystem } from '@/components/HeroSystem';
 import { StackSection } from '@/components/StackSection';
 import { Partners } from '@/components/Partners';
 import { Testimonials } from '@/components/Testimonials';
@@ -11,7 +11,7 @@ import { Reveal } from '@/components/Reveal';
 import { FAQSection, FAQItem } from '@/components/FAQSection';
 import { pageMetadata } from '@/lib/seo';
 
-export const metadata=pageMetadata({title:'Custom Web Development for Growing Businesses',description:'Conversion-focused websites, e-commerce systems, dashboards and full-stack web apps built around customer action, operational clarity and clean ownership.',path:'/',image:'/heroes/home.png'});
+export const metadata=pageMetadata({title:'Custom Web Development for Growing Businesses',description:'Conversion-focused websites, e-commerce systems, dashboards and full-stack web apps built around customer action, operational clarity and clean ownership.',path:'/',image:'/opengraph-image.png'});
 
 const faqs:FAQItem[]=[
  {q:'What kinds of projects are a good fit?',a:'Custom business websites, e-commerce experiences, dashboards, internal tools and full-stack web apps are the strongest fit. Focused improvements to an existing product can also make sense when the problem is clear.'},
@@ -31,7 +31,7 @@ const faqs:FAQItem[]=[
 export default async function Home(){const featuredProjects=await getFeaturedProjects();return <>
 <section className="home-hero-wrap"><div className="shell hero">
   <Reveal className="hero-copy"><span className="eyebrow">Custom web development for growing businesses</span><h1>Custom web products that make it easier for customers to say yes — and easier for your team to operate.</h1><p className="lead">Websites, commerce systems, dashboards and full-stack apps built around conversion, clarity and clean ownership — not generic templates or disconnected pieces.</p><div className="hero-actions"><Link className="btn" href="/contact#project-brief">Get a Free Project Review <ArrowRight size={17}/></Link><Link className="btn btn-secondary" href="/work">Explore Selected Work</Link></div><p className="microproof"><Check size={15}/> No technical brief needed <span>·</span> Scope before commitment <span>·</span> Direct developer access</p></Reveal>
-  <Reveal className="hero-media"><HeroImage kind="home"/></Reveal>
+  <Reveal className="hero-media"><HeroSystem kind="home"/></Reveal>
 </div></section>
 
 <section className="proof-ribbon"><div className="shell proof-ribbon-grid"><article><Smartphone/><div><b>Built for mobile</b><span>Responsive paths that feel intentional on the screens customers actually use.</span></div></article><article><MousePointerClick/><div><b>Built for action</b><span>Hierarchy and calls to action shaped around the next useful decision.</span></div></article><article><Workflow/><div><b>Built as a system</b><span>Interface, data, content and deployment planned together.</span></div></article><article><ShieldCheck/><div><b>Built to hand over</b><span>Ownership stays clear after launch.</span></div></article></div></section>

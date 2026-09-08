@@ -6,7 +6,7 @@ import {Reveal} from '@/components/Reveal';
 import {FAQSection, FAQItem} from '@/components/FAQSection';
 import {pageMetadata} from '@/lib/seo';
 
-export const metadata=pageMetadata({title:'Product-Minded Full-Stack Development',description:'How FahadDev approaches product strategy, interface design, full-stack development, testing, launch and clean handoff for business web products.',path:'/about',image:'/heroes/about.png'});
+export const metadata=pageMetadata({title:'Product-Minded Full-Stack Development',description:'How FahadDev approaches product strategy, interface design, full-stack development, testing, launch and clean handoff for business web products.',path:'/about',image:'/opengraph-image.png'});
 const faqs:FAQItem[]=[
  {q:'Are you a solo developer or an agency?',a:'FahadDev is a direct solo development practice. Clients communicate with the person shaping and building the product rather than passing through account-management layers.'},
  {q:'What do you handle personally?',a:'Depending on the project, that can include product framing, interface implementation, backend logic, database work, CMS, integrations, testing, deployment and handoff.'},

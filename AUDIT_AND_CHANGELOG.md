@@ -123,3 +123,17 @@ Project screenshots are uploaded once to Supabase Storage and referenced by the 
 
 ## Visual corrections
 The dark homepage build-principles ribbon was replaced with a lighter trust rail to better match the rest of the desktop composition, while mobile remains left aligned. The technology section now uses equal logo tiles with a fixed visual rhythm instead of variable-width chips.
+
+# v10 Follow-up — Seamless Hero System + Sales-Ready Lead Inbox
+
+## Lead handling
+The contact form now captures a WhatsApp/phone number in addition to email. New enquiries land in the existing private Admin lead inbox. Each lead can be opened directly in Gmail, WhatsApp or the phone dialer, while the full project brief remains visible on the same card. Search and status filtering were added so the inbox can operate like a lightweight sales pipeline rather than an archive.
+
+## Hero system
+The repeated static hero illustrations were removed from the public UI. Home, Work, Services, Process, About and Contact now have different product-interface scenes that explain the purpose of each page. Service-detail scenes adapt to the specific service, and case-study pages use an uploaded project image as the hero when available.
+
+## Visual consistency
+The homepage promise rail is now a contained trust surface. The technology section uses compact aligned tool rows rather than scattered logo tiles. The social preview was rebuilt at 1200 × 630 and default metadata no longer points to the old page hero images.
+
+## Validation
+Source syntax, CSS balance, literal routes, local assets, lead actions and hero coverage were re-audited. Dependency installation timed out in this workspace, so the final framework build still needs to run locally or on Vercel.

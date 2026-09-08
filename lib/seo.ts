@@ -8,7 +8,7 @@ export function pageMetadata({
   title,
   description,
   path='/',
-  image='/heroes/home.png',
+  image='/opengraph-image.png',
 }: {title:string; description:string; path?:string; image?:string}): Metadata {
   const url = new URL(path, SITE_URL).toString();
   return {

@@ -1,86 +1,106 @@
-# FahadDev v9 — Moderated Reviews, Portfolio CMS & Visual Polish
+# FahadDev v10 — Seamless UI + Actionable Lead Inbox
 
-This version builds on the CEO/conversion rebuild and adds a real content-management workflow for the two trust surfaces that matter most: **client reviews and portfolio work**. The design rule remains unchanged: **centered hierarchy on desktop, left-aligned reading flow on mobile**.
+This version builds on v9 and focuses on two things that directly affect client acquisition: **a modern, coherent visual system across every public hero** and **a lead inbox that lets you reply immediately instead of only reading enquiries**.
 
-## What changed in v9
+The site still follows the established responsive rule: **desktop uses centered section hierarchy and balanced compositions; mobile uses a natural left-aligned reading flow**.
 
-### Review moderation
-- Public review submissions are now saved as **pending**.
-- Pending reviews never render on the public homepage.
-- `/admin/dashboard` shows pending and published counts plus filters.
-- Admin can edit the reviewer name, company, role, review copy and rating.
-- **Approve & publish** makes a pending review public and refreshes the homepage.
-- **Unpublish** hides a review without deleting it.
-- **Delete** permanently removes it.
-- Existing v8 reviews are migrated to `approved` when `supabase-setup.sql` is rerun, so real existing feedback is not accidentally hidden.
+## What changed in v10
 
-### Functional portfolio admin
-- Projects are no longer locked inside `lib/projects.ts` after database setup.
-- Admin now has **Add new work**.
-- Every work item can be expanded and edited in place.
-- Editable fields include title, slug, type, timeline label, display order, live URL, stack, concept flag, publish state, summary, problem, approach, build and result.
-- Projects can be deleted from Admin.
-- New or hidden work can be published/unpublished without deleting it.
-- Existing Youth Senate, ÉLITES, Pulse and Loom Studio projects are seeded into Supabase so they are immediately editable after setup.
+### 1. Contact enquiries now include WhatsApp / phone
+- The project brief now collects name, email, WhatsApp/phone, company, website, project type, project shape and the actual brief.
+- Phone is required for new submissions so each new lead can be answered through email or WhatsApp/phone.
+- Existing v9 leads are preserved even if they do not already have a phone number.
+- The privacy page now explicitly explains that the submitted phone number is used to reply to the enquiry.
 
-### Project image management
-- Admin accepts JPG, PNG or WebP project screenshots up to 4 MB.
-- Images are uploaded server-side to a public Supabase Storage bucket named `project-images`.
-- One uploaded project image automatically appears on:
-  - homepage Featured Work
-  - Work page project card
-  - individual case-study hero
-- Replacing/deleting a project also cleans up the previous stored image when possible.
+### 2. Admin is now an actionable sales inbox
+Every lead card on `/admin/dashboard` now includes:
+- **Gmail** button with a Gmail compose window addressed to that lead;
+- **WhatsApp** button with a prepared first-reply message;
+- **Call** button using the saved phone number;
+- lead status: new → contacted → qualified → won → closed;
+- search across name, email, phone, company, project and message;
+- status filters;
+- project URL, project type, size, message and received date;
+- permanent delete control.
 
-### Visual polish
-- Rebuilt the homepage “Built for mobile / Built for action / Built as a system / Built to hand over” strip as a lighter premium promise rail with consistent icon blocks.
-- Rebuilt the stack section into equal tool tiles with controlled icon sizing, spacing and alignment instead of loose logo chips.
-- Added polished project-image overlays and case-study image treatment.
-- Upgraded Admin from a basic table into an operational dashboard with overview metrics, moderation states, filters, expandable portfolio editors and upload previews.
+Older enquiries that have no phone number still render safely and show that WhatsApp is unavailable for that historical record.
 
-## Supabase setup — required once after upgrading
-Run `supabase-setup.sql` in the Supabase SQL Editor. It is written to be safe to run again and will:
-1. upgrade reviews with `pending` / `approved` moderation fields;
-2. preserve existing reviews as approved;
-3. keep the leads table;
-4. create the editable `projects` table;
-5. seed the four existing portfolio projects if they are missing;
-6. create/update the public `project-images` Storage bucket.
+### 3. Rebuilt the hero system across the public site
+The previous repeated screenshot-in-a-frame treatment has been removed from the actual page UI.
 
-Environment variables stay the same:
+The new heroes are interface-native product scenes rather than ambiguous decorative images:
+- **Home:** customer journey from arrival → understanding → action;
+- **Work:** project systems and problem/build/outcome proof structure;
+- **Services:** connected business/product architecture;
+- **Process:** visible discovery → shape → build → verify → launch route;
+- **About:** product thinking + direct-builder principles;
+- **Contact:** actual project-intake and response-channel model;
+- **Service detail pages:** the visual changes according to commerce, dashboard, full-stack app or focused-improvement intent;
+- **Case-study pages:** project screenshots become a proper hero when available; otherwise a structured work-system visual is used.
+
+### 4. Homepage visual discipline
+- Rebuilt the “Built for mobile / Built for action / Built as a system / Built to hand over” area into one contained white trust surface rather than a colored band.
+- Rebuilt the technology section again so tools appear as compact aligned rows inside three purpose-based groups instead of scattered icon tiles.
+- Unified borders, shadows, radius, card hover behavior and alternate-section backgrounds.
+
+### 5. Social preview cleanup
+- Removed the old repeated hero illustration assets from the live UI path.
+- Rebuilt the default Open Graph / Twitter share card at the correct **1200 × 630** ratio.
+- All default page metadata now uses the new branded social card.
+- Real uploaded portfolio screenshots can still be used for individual case-study sharing.
+
+## Supabase upgrade — required
+
+If you already ran the v9 setup, the only new database migration required by v10 is:
+
+```sql
+alter table public.leads add column if not exists phone text;
+```
+
+You can run `supabase-v10-upgrade.sql` for that one-line upgrade.
+
+Alternatively, `supabase-setup.sql` has also been updated and is designed to be safe to run again. It contains the phone migration plus the existing reviews, leads, projects and project-image storage setup.
+
+## Environment variables
+
 ```text
-NEXT_PUBLIC_SITE_URL=https://fahaddev.com
+NEXT_PUBLIC_SITE_URL=https://your-production-domain.com
 NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
 NEXT_PUBLIC_SUPABASE_URL=
 SUPABASE_SERVICE_ROLE_KEY=
-ADMIN_PASSWORD=
+ADMIN_PASSWORD=use-a-long-private-password
 ```
 
-Never expose `SUPABASE_SERVICE_ROLE_KEY` in browser/client code.
+Never expose `SUPABASE_SERVICE_ROLE_KEY` in client-side code.
 
-## Validation completed in this workspace
-- TypeScript/TSX syntax-transpile validation: **53 files, 0 syntax errors**.
-- CSS braces: balanced.
-- Known public routes: **15**, with dynamic project routes enabled for new Admin-created work.
-- Broken literal internal links found: **0**.
-- Critical feature audit passed for:
-  - pending review inserts
-  - approved-only public reviews
-  - project CRUD API
-  - project-image upload API
-  - Admin Add/Edit/Delete UI
-  - Supabase Storage setup
-  - project images on cards
-  - project images on case studies
+## Validation completed
 
-A complete `next build` could not be executed here because dependency installation timed out in this environment. Run `npm install && npm run build` locally or let Vercel run the production build before promotion.
+- TS/TSX source syntax validation: **52 files, 0 syntax errors** after removing obsolete hero components.
+- CSS brace balance: clean.
+- Known routes audited: **16** including admin and seeded dynamic service/work routes.
+- Literal internal links audited: **35, 0 broken**.
+- Referenced local assets missing: **0**.
+- Critical lead workflow checks passed:
+  - phone capture
+  - phone API insert
+  - phone database migration
+  - Gmail compose action
+  - WhatsApp reply action
+  - Call action
+  - search + lead filters
+- Hero coverage checks passed for Home, all top-level pages, service-detail routes and case-study routes.
+- New Open Graph and Twitter images verified at 1200 × 630.
 
-## Launch checklist
-1. Run the new `supabase-setup.sql` once.
-2. Confirm the existing four projects appear under `/admin/dashboard`.
-3. Upload one project screenshot and verify it appears on Home, Work and its case-study page.
-4. Submit one public review and confirm it appears as **Pending** in Admin but not on Home.
-5. Approve the review and confirm it appears publicly.
-6. Unpublish it and confirm it disappears without being deleted.
-7. Add a temporary new project, publish it, verify its route, then delete it.
-8. Run `npm install && npm run build` before production deployment.
+A complete `next build` could not be executed in this workspace because `npm install` timed out before dependencies could be downloaded. Source-level validation passed; run `npm install && npm run build` locally or let Vercel perform the production build before promotion.
+
+## v10 launch checklist
+
+1. Run `supabase-v10-upgrade.sql` in Supabase SQL Editor (or rerun the full `supabase-setup.sql`).
+2. Redeploy v10 with the same environment variables.
+3. Submit a test project brief with your own email and phone.
+4. Open `/admin/dashboard` and confirm the lead appears.
+5. Test **Gmail**, **WhatsApp** and **Call** from the lead card.
+6. Move the test lead through statuses and test search/filtering.
+7. Verify Home, Services, Work, Process, About and Contact heroes on desktop and mobile.
+8. Upload a real project screenshot in Admin and confirm it appears on Home, Work and that case-study hero.
+9. Run a production build / deployment check before pointing the final domain.

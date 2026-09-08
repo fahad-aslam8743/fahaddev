@@ -30,6 +30,7 @@ create table if not exists public.leads (
   id uuid primary key default gen_random_uuid(),
   name text not null,
   email text not null,
+  phone text,
   company text,
   website_url text,
   project text not null,
@@ -39,6 +40,7 @@ create table if not exists public.leads (
   source text,
   created_at timestamptz not null default now()
 );
+alter table public.leads add column if not exists phone text;
 create index if not exists leads_created_at_idx on public.leads(created_at desc);
 create index if not exists leads_status_idx on public.leads(status);
 alter table public.leads enable row level security;
