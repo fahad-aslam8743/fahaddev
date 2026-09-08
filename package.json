@@ -1,6 +1,6 @@
 {
-  "name": "fahaddev-v14-4-dream-engine",
-  "version": "14.4.0",
+  "name": "fahaddev-v15-human-studio-hero",
+  "version": "15.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

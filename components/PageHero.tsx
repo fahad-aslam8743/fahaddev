@@ -8,7 +8,7 @@ type Action={label:string;href:string;external?:boolean};
 
 export function PageHero({kind,eyebrow,title,body,primary,secondary}:{kind:Kind;eyebrow:string;title:string;body:string;primary?:Action;secondary?:Action}){
   const actions=[primary,secondary].filter(Boolean) as Action[];
-  return <section className="page-hero-wrap">
+  return <section className={`page-hero-wrap page-hero-${kind}`}>
     <div className="shell page-hero">
       <Reveal className="page-hero-copy">
         <nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><span>{kind[0].toUpperCase()+kind.slice(1)}</span></nav>

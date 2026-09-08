@@ -1,120 +1,113 @@
-'use client';
-
-import { useRef } from 'react';
-import type { PointerEvent as ReactPointerEvent } from 'react';
 import Image from 'next/image';
-import { ArrowUpRight, BarChart3, Check, Code2, Database, Gauge, Layers3, Mail, MessageCircle, Rocket, ShieldCheck, ShoppingBag, Sparkles, Workflow } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Check,
+  Code2,
+  Database,
+  LayoutDashboard,
+  Mail,
+  MessageCircle,
+  Rocket,
+  ShieldCheck,
+  ShoppingBag,
+  Smartphone,
+} from 'lucide-react';
 
 type Kind='home'|'work'|'services'|'process'|'about'|'contact'|'privacy';
 
-const meta:Record<Kind,{label:string;sub:string}>= {
-  home:{label:'Live product view',sub:'What customers see + what your team controls'},
-  work:{label:'Case-study view',sub:'Problem, system and outcome in one story'},
-  services:{label:'Connected build',sub:'Experience, content, data and deployment'},
-  process:{label:'Visible delivery',sub:'You can see what is happening next'},
-  about:{label:'Direct builder',sub:'Strategy, design judgment and implementation'},
-  contact:{label:'Project intake',sub:'A clear route from first message to next step'},
-  privacy:{label:'Data handling',sub:'Only the context needed for the conversation you started'},
+const heroImage:Record<Kind,string>={
+  home:'/heroes-v15/home.jpg',
+  work:'/heroes-v15/work.jpg',
+  services:'/heroes-v15/services.jpg',
+  process:'/heroes-v15/process.jpg',
+  about:'/heroes-v15/about.jpg',
+  contact:'/heroes-v15/contact.jpg',
+  privacy:'/heroes-v15/privacy.jpg',
 };
 
-function ConnectorLines(){return <svg className="studio-connectors" viewBox="0 0 620 410" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M88 86 C185 86 150 190 255 190 S365 118 455 118"/>
-  <path d="M160 320 C230 260 290 340 365 274 S468 246 535 300"/>
-  <path d="M52 235 C150 250 172 246 245 282"/>
-</svg>}
+function Chrome({label}:{label:string}){return <div className="ref-browser-chrome"><span/><span/><span/><b>{label}</b><i>↗</i></div>}
 
-function BrowserTop({label='fahaddev · live preview'}:{label?:string}){return <div className="studio-browser-top"><span/><span/><span/><b>{label}</b><i>↗</i></div>}
-
-function HomeScene({imageUrl,context}:{imageUrl?:string|null;context?:string}){return <div className="studio-scene home-scene">
-  <div className={`studio-live-site ${imageUrl?'has-real-preview':''}`}>
-    {imageUrl?<div className="studio-real-project"><Image src={imageUrl} alt="Featured FahadDev project preview" fill priority sizes="(max-width: 720px) 82vw, 430px"/><div className="studio-real-project-shade"/><div className="studio-real-project-label"><small>Featured build</small><b>{context||'Live project'}</b><span>real project screenshot</span></div></div>:<>
-    <div className="studio-live-nav"><b>North.</b><span>Shop</span><span>Story</span><i>Bag 02</i></div>
-    <div className="studio-live-hero"><div><small>New collection</small><strong>Objects made to stay.</strong><button>Explore collection <ArrowUpRight size={13}/></button></div><div className="studio-product-shape"><i/><i/><i/></div></div>
-    <div className="studio-live-products"><span/><span/><span/></div></>}
-  </div>
-  <div className="studio-control-card control-one"><span><Database/><small>CMS</small></span><b>Content your team can update</b><i><em style={{width:'78%'}}/></i></div>
-  <div className="studio-control-card control-two"><span><BarChart3/><small>Orders</small></span><b>Customer action connected to operations</b><div className="mini-bars"><i/><i/><i/><i/></div></div>
-  <div className="studio-status-chip"><span/><b>Production ready</b><small>responsive · tested · owned</small></div>
-</div>}
-
-function WorkScene({context}:{context?:string}){return <div className="studio-scene work-scene">
-  <div className="work-feature-card"><small>Selected case</small><strong>{context||'A working product, not just a final screenshot.'}</strong><div className="work-preview"><div className="work-preview-nav"/><div className="work-preview-main"><span/><span/><span/></div></div></div>
-  <div className="work-story-card"><span>01</span><div><small>Problem</small><b>Find the friction</b></div></div>
-  <div className="work-story-card second"><span>02</span><div><small>System</small><b>Connect the parts</b></div></div>
-  <div className="work-story-card third"><span>03</span><div><small>Outcome</small><b>Make the result usable</b></div></div>
-</div>}
-
-function ServicesScene({context}:{context?:string}){return <div className="studio-scene services-scene">
-  <ConnectorLines/>
-  <div className="service-node node-main"><Sparkles/><small>{context||'Your product'}</small><b>One connected experience</b></div>
-  <div className="service-node node-a"><Code2/><span>Interface</span></div>
-  <div className="service-node node-b"><Database/><span>Data</span></div>
-  <div className="service-node node-c"><ShoppingBag/><span>Commerce</span></div>
-  <div className="service-node node-d"><Workflow/><span>Operations</span></div>
-  <div className="service-node node-e"><Rocket/><span>Launch</span></div>
-  <div className="service-flow-label"><span>Design</span><i/><span>Build</span><i/><span>Connect</span><i/><span>Ship</span></div>
-</div>}
-
-function ProcessScene(){
-  const stages=[
-    ['Understand','goal + friction'],
-    ['Shape','scope + flows'],
-    ['Build','working slices'],
-    ['Verify','test + refine'],
-    ['Launch','deploy + handoff'],
-  ];
-  return <div className="studio-scene process-scene">
-    <div className="process-current"><Gauge/><span><small>Current principle</small><b>Important decisions stay visible.</b></span></div>
-    <div className="process-rail">
-      {stages.map(([label,detail],i)=><div key={label} className="process-rail-step"><div className="process-rail-label"><span>{String(i+1).padStart(2,'0')}</span><b>{label}</b></div><i className="process-rail-dot"/><small>{detail}</small></div>)}
+function HomeVisual({imageUrl,context}:{imageUrl?:string|null;context?:string}){
+  return <>
+    <div className="ref-browser ref-browser-home">
+      <Chrome label="fahaddev · featured build"/>
+      <div className="ref-browser-screen">
+        {imageUrl?<Image src={imageUrl} alt={`${context||'Featured'} project preview`} fill priority sizes="(max-width: 760px) 82vw, 520px"/>:<div className="ref-demo-site">
+          <div className="ref-demo-nav"><b>Atelier.</b><span>Work</span><span>About</span><i>Menu</i></div>
+          <div className="ref-demo-copy"><small>Designed to be understood</small><strong>Beautiful outside.<br/>Useful underneath.</strong><button>Explore <ArrowUpRight size={12}/></button></div>
+          <div className="ref-demo-object"><i/><i/><i/></div>
+        </div>}
+      </div>
     </div>
-  </div>
+    <div className="ref-float-card ref-float-a"><Database/><span><small>CMS + admin</small><b>Update without code</b></span></div>
+    <div className="ref-float-card ref-float-b"><Smartphone/><span><small>Responsive</small><b>Built around real phones</b></span></div>
+    <div className="ref-status"><i/><span><b>Production ready</b><small>design · system · launch</small></span></div>
+  </>;
 }
 
-function AboutScene(){return <div className="studio-scene about-scene">
-  <div className="builder-card"><div className="builder-avatar">FA</div><div><small>FahadDev</small><strong>One person from product question to production.</strong></div></div>
-  <div className="builder-map"><div><span>01</span><b>Understand</b><small>What should change for the business?</small></div><i/><div><span>02</span><b>Build</b><small>What system makes that change possible?</small></div><i/><div><span>03</span><b>Ship</b><small>How does it stay usable after launch?</small></div></div>
-  <div className="builder-stack"><span><Layers3/>Product thinking</span><span><Code2/>Full-stack build</span><span><ShieldCheck/>Clean ownership</span></div>
-</div>}
+function WorkVisual(){return <>
+  <div className="ref-work-stack">
+    <div className="ref-work-card card-one"><span>01</span><small>Organization platform</small><b>Public experience + admin workflows</b><div><i/><i/><i/></div></div>
+    <div className="ref-work-card card-two"><span>02</span><small>Commerce</small><b>Storefront + content + checkout</b><div><i/><i/><i/></div></div>
+    <div className="ref-work-card card-three"><span>03</span><small>Product system</small><b>Interface + data + operations</b><div><i/><i/><i/></div></div>
+  </div>
+  <div className="ref-proof-chip"><Check/><span><small>Proof over decoration</small><b>Problem → build → result</b></span></div>
+</>}
 
+function ServicesVisual({context}:{context?:string}){return <>
+  <div className="ref-service-core"><small>{context||'Connected web product'}</small><strong>One product.<br/>All the important layers.</strong></div>
+  <div className="ref-service-layer layer-1"><Code2/><span><small>Experience</small><b>UI + responsive flows</b></span></div>
+  <div className="ref-service-layer layer-2"><Database/><span><small>System</small><b>CMS + data + auth</b></span></div>
+  <div className="ref-service-layer layer-3"><ShoppingBag/><span><small>Business</small><b>Leads + payments + admin</b></span></div>
+  <div className="ref-service-layer layer-4"><Rocket/><span><small>Launch</small><b>Domain + deployment + ownership</b></span></div>
+</>}
 
-function PrivacyScene(){return <div className="studio-scene privacy-scene">
-  <div className="privacy-shield"><ShieldCheck/><span><small>Project enquiries</small><b>Your details are used to understand and reply to the conversation you started.</b></span></div>
-  <div className="privacy-flow"><div><span>01</span><b>You send context</b></div><i/><div><span>02</span><b>Stored for reply</b></div><i/><div><span>03</span><b>Managed privately</b></div></div>
-  <div className="privacy-note"><Check/><span>Reviews are moderated before public display.</span></div>
-</div>}
+function ProcessVisual(){const steps=['Understand','Shape','Build','Verify','Launch'];return <>
+  <div className="ref-process-board"><small>Visible delivery</small><strong>Nothing important disappears into a black box.</strong><div className="ref-process-line">{steps.map((s,i)=><div key={s}><span>{String(i+1).padStart(2,'0')}</span><i/><b>{s}</b></div>)}</div></div>
+  <div className="ref-process-note"><LayoutDashboard/><span><small>Client view</small><b>Working checkpoints, not vague updates</b></span></div>
+</>}
 
-function ContactScene(){return <div className="studio-scene contact-scene">
-  <div className="message-bubble client"><small>You</small><b>“Our mobile site loses people before they enquire.”</b></div>
-  <div className="message-path"><i/><span>context</span><i/><span>scope</span><i/><span>next step</span></div>
-  <div className="message-bubble reply"><small>FahadDev</small><b>“Send the URL. I’ll start with the friction before recommending a rebuild.”</b></div>
-  <div className="contact-live-actions"><div><Mail/><span><small>Email</small><b>Detailed brief</b></span></div><div><MessageCircle/><span><small>WhatsApp</small><b>Quick context</b></span></div></div>
-</div>}
+function AboutVisual(){return <>
+  <div className="ref-about-card"><div className="ref-about-monogram">FA</div><div><small>FahadDev</small><strong>One builder from the first product question to production.</strong></div></div>
+  <div className="ref-about-principles"><span><b>01</b>Understand the business</span><span><b>02</b>Build the right system</span><span><b>03</b>Hand over cleanly</span></div>
+  <div className="ref-about-tools"><Code2/><Database/><LayoutDashboard/><Rocket/></div>
+</>}
+
+function ContactVisual(){return <>
+  <div className="ref-message ref-message-client"><small>Project enquiry</small><b>“Our website looks fine, but mobile visitors are not converting.”</b></div>
+  <div className="ref-message ref-message-reply"><small>FahadDev</small><b>“Send the URL. I’ll start with the friction before recommending a rebuild.”</b></div>
+  <div className="ref-contact-actions"><span><Mail/><b>Email</b></span><span><MessageCircle/><b>WhatsApp</b></span></div>
+</>}
+
+function PrivacyVisual(){return <>
+  <div className="ref-privacy-card"><ShieldCheck/><span><small>Project information</small><strong>Only used to understand and reply to the conversation you started.</strong></span></div>
+  <div className="ref-privacy-flow"><span>Send context</span><i/><span>Private review</span><i/><span>Reply</span></div>
+</>}
+
+function resolveHeroImage(kind:Kind,context?:string){
+  if(kind==='services'&&context){
+    const c=context.toLowerCase();
+    if(c.includes('commerce'))return heroImage.work;
+    if(c.includes('dashboard')||c.includes('tool'))return heroImage.services;
+    if(c.includes('full')||c.includes('app'))return heroImage.process;
+    if(c.includes('improve')||c.includes('existing'))return heroImage.about;
+  }
+  if(kind==='work'&&context){
+    const choices=[heroImage.work,heroImage.home,heroImage.services,heroImage.about];
+    let n=0;for(const ch of context)n=(n+ch.charCodeAt(0))%choices.length;
+    return choices[n];
+  }
+  return heroImage[kind];
+}
 
 export function HeroSystem({kind='home',context,imageUrl}:{kind?:Kind;context?:string;imageUrl?:string|null}){
-  const ref=useRef<HTMLDivElement>(null);
-  const onMove=(e:ReactPointerEvent<HTMLDivElement>)=>{
-    if(!ref.current||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    const r=ref.current.getBoundingClientRect();
-    const x=((e.clientX-r.left)/r.width-.5)*2;
-    const y=((e.clientY-r.top)/r.height-.5)*2;
-    ref.current.style.setProperty('--hero-rx',`${y*-1.1}deg`);
-    ref.current.style.setProperty('--hero-ry',`${x*1.5}deg`);
-    ref.current.style.setProperty('--hero-tx',`${x*4}px`);
-    ref.current.style.setProperty('--hero-ty',`${y*4}px`);
-    ref.current.style.setProperty('--hero-grid-x',`${x*-4}px`);
-    ref.current.style.setProperty('--hero-grid-y',`${y*-4}px`);
-    ref.current.style.setProperty('--hero-orb-x',`${x*10}px`);
-    ref.current.style.setProperty('--hero-orb-y',`${y*8}px`);
-  };
-  const onLeave=()=>{if(!ref.current)return; for(const [k,v] of [['--hero-rx','0deg'],['--hero-ry','0deg'],['--hero-tx','0px'],['--hero-ty','0px'],['--hero-grid-x','0px'],['--hero-grid-y','0px'],['--hero-orb-x','0px'],['--hero-orb-y','0px']]) ref.current.style.setProperty(k,v)};
-  return <div ref={ref} className={`studio-hero-system hero-kind-${kind}`} onPointerMove={onMove} onPointerLeave={onLeave}>
-    <div className="studio-hero-grid" aria-hidden="true"/>
-    <div className="studio-orb orb-one" aria-hidden="true"/><div className="studio-orb orb-two" aria-hidden="true"/>
-    <div className="studio-browser">
-      <BrowserTop label={kind==='work'&&context?`${context} · case study`:'fahaddev · interactive preview'}/>
-      {kind==='home'?<HomeScene imageUrl={imageUrl} context={context}/>:kind==='work'?<WorkScene context={context}/>:kind==='services'?<ServicesScene context={context}/>:kind==='process'?<ProcessScene/>:kind==='about'?<AboutScene/>:kind==='privacy'?<PrivacyScene/>:<ContactScene/>}
+  const background=resolveHeroImage(kind,context);
+  return <figure className={`ref-hero-visual ref-hero-${kind}`}>
+    <Image className="ref-hero-photo" src={background} alt="" fill priority={kind==='home'} sizes="(max-width: 860px) 94vw, 48vw"/>
+    <div className="ref-hero-photo-wash"/>
+    <div className="ref-hero-scene">
+      {kind==='home'?<HomeVisual imageUrl={imageUrl} context={context}/>:kind==='work'?<WorkVisual/>:kind==='services'?<ServicesVisual context={context}/>:kind==='process'?<ProcessVisual/>:kind==='about'?<AboutVisual/>:kind==='contact'?<ContactVisual/>:<PrivacyVisual/>}
     </div>
-    <div className="studio-hero-label"><span><i/>Interactive preview</span><div><small>{meta[kind].label}</small><b>{context||meta[kind].sub}</b></div></div>
-  </div>
+    <figcaption><span>FahadDev</span><b>{kind==='home'?'Design + build + launch':kind==='work'?'Selected work':kind==='services'?'Connected development':kind==='process'?'Clear delivery':kind==='about'?'Direct builder':kind==='contact'?'Start a project':'Privacy by design'}</b></figcaption>
+  </figure>;
 }
