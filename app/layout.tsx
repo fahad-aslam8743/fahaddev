@@ -3,6 +3,7 @@ import './globals.css';
 import { Nav } from '@/components/Nav';
 import { Footer } from '@/components/Footer';
 import { MobileLeadBar } from '@/components/MobileLeadBar';
+import { GlobalMotion } from '@/components/GlobalMotion';
 import { DEFAULT_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/seo';
 
 export const viewport:Viewport={themeColor:'#0b1220',colorScheme:'light'};
@@ -47,4 +48,4 @@ const structuredData={
   ],
 };
 
-export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body><a className="skip-link" href="#main-content">Skip to content</a><Nav/><main id="main-content">{children}</main><Footer/><MobileLeadBar/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(structuredData).replace(/</g,'\\u003c')}}/></body></html>}
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body><GlobalMotion/><a className="skip-link" href="#main-content">Skip to content</a><Nav/><main id="main-content">{children}</main><Footer/><MobileLeadBar/><script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(structuredData).replace(/</g,'\\u003c')}}/></body></html>}

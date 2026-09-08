@@ -2,9 +2,18 @@ import Link from 'next/link';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { HeroSystem } from './HeroSystem';
 import { Reveal } from './Reveal';
+import { KineticTicker } from './KineticTicker';
 
 type Kind='work'|'services'|'process'|'about'|'contact';
 type Action={label:string;href:string;external?:boolean};
+
+const ticker:Record<Kind,readonly string[]>={
+  work:['Problem','System','Outcome','Commerce','Organization platforms','Dashboards','Production thinking'],
+  services:['Commerce','Dashboards','Full-stack apps','Website improvements','CMS','Payments','Admin systems'],
+  process:['Discover','Shape','Build','Review','Verify','Launch','Handoff'],
+  about:['Product thinking','Direct communication','Full-stack delivery','Ownership','Practical decisions','No handoff maze'],
+  contact:['Project context','Business goal','Current friction','Email reply','WhatsApp reply','Clear next step'],
+};
 
 export function PageHero({kind,eyebrow,title,body,primary,secondary}:{kind:Kind;eyebrow:string;title:string;body:string;primary?:Action;secondary?:Action}){
   const actions=[primary,secondary].filter(Boolean) as Action[];
@@ -20,5 +29,6 @@ export function PageHero({kind,eyebrow,title,body,primary,secondary}:{kind:Kind;
       </Reveal>
       <Reveal className="page-hero-media"><HeroSystem kind={kind}/></Reveal>
     </div>
+    <KineticTicker items={ticker[kind]} compact/>
   </section>;
 }

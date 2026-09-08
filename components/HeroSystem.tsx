@@ -1,3 +1,6 @@
+'use client';
+
+import { useRef, type PointerEvent } from 'react';
 import {
   ArrowUpRight,
   BarChart3,
@@ -71,8 +74,18 @@ function ContactScene(){return <div className="hs-scene hs-contact-scene">
 </div>}
 
 export function HeroSystem({kind='home',context}:{kind?:Kind;context?:string}){
-  return <div className={`hero-system hs-${kind}`} aria-hidden="true">
-    <div className="hs-aura"/>
+  const ref=useRef<HTMLDivElement>(null);
+  const onMove=(e:PointerEvent<HTMLDivElement>)=>{
+    const el=ref.current;if(!el)return;
+    const r=el.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width;const y=(e.clientY-r.top)/r.height;
+    el.style.setProperty('--hs-rx',`${(0.5-y)*5}deg`);
+    el.style.setProperty('--hs-ry',`${(x-0.5)*7}deg`);
+    el.style.setProperty('--hs-x',`${x*100}%`);el.style.setProperty('--hs-y',`${y*100}%`);
+  };
+  const onLeave=()=>{const el=ref.current;if(!el)return;el.style.setProperty('--hs-rx','0deg');el.style.setProperty('--hs-ry','0deg')};
+  return <div ref={ref} onPointerMove={onMove} onPointerLeave={onLeave} className={`hero-system hs-${kind}`} aria-hidden="true">
+    <div className="hs-aura"/><div className="hs-scan"/>
     <div className="hs-window">
       <WindowTop kind={kind}/>
       {kind==='home'?<HomeScene/>:kind==='work'?<WorkScene context={context}/>:kind==='services'?<ServicesScene context={context}/>:kind==='process'?<ProcessScene/>:kind==='about'?<AboutScene/>:<ContactScene/>}

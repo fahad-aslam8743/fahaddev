@@ -16,8 +16,15 @@ const mobileLinks=[...desktopLinks,['Contact','/contact'] as const];
 
 export function Nav(){
   const [open,setOpen]=useState(false);
+  const [scrolled,setScrolled]=useState(false);
   const pathname=usePathname();
   const active=(href:string)=>href==='/'?pathname===href:pathname.startsWith(href);
+  useEffect(()=>{
+    const onScroll=()=>setScrolled(window.scrollY>18);
+    onScroll();
+    window.addEventListener('scroll',onScroll,{passive:true});
+    return()=>window.removeEventListener('scroll',onScroll);
+  },[]);
   useEffect(()=>{
     if(!open) return;
     const y=window.scrollY;
@@ -40,7 +47,7 @@ export function Nav(){
   },[]);
 
   return <>
-    <header className="site-header">
+    <header className={`site-header ${scrolled?'is-scrolled':''}`}>
       <div className="shell nav-inner">
         <Logo/>
         <nav className="desktop-nav" aria-label="Primary navigation">
