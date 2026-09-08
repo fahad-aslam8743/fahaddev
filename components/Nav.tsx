@@ -47,10 +47,10 @@ export function Nav(){
             href={href}
             aria-current={active(href)?'page':undefined}
             className={active(href)?'active':''}
-            style={{'--menu-delay':`${i*58}ms`} as CSSProperties}
+            style={{'--menu-delay':`${i*34}ms`} as CSSProperties}
           ><span>{String(i+1).padStart(2,'0')}</span><strong>{label}</strong><ArrowUpRight size={18}/></Link>)}
         </nav>
-        <div className="mobile-dropdown-footer" style={{'--menu-delay':`${mobileLinks.length*58}ms`} as CSSProperties}>
+        <div className="mobile-dropdown-footer" style={{'--menu-delay':`${mobileLinks.length*34}ms`} as CSSProperties}>
           <div><small>Have something in mind?</small><b>Send the problem. I’ll help shape the route.</b></div>
           <a href="https://wa.me/923255504461" target="_blank" rel="noreferrer"><MessageCircle size={17}/>WhatsApp</a>
         </div>
