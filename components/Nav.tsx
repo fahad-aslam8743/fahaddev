@@ -13,8 +13,9 @@ const desktopLinks=[
   ['Work','/work'],
   ['Process','/process'],
   ['About','/about'],
+  ['Contact','/contact'],
 ] as const;
-const mobileLinks=[...desktopLinks,['Contact','/contact'] as const];
+const mobileLinks=desktopLinks;
 
 export function Nav(){
   const [open,setOpen]=useState(false);
@@ -36,7 +37,7 @@ export function Nav(){
           {desktopLinks.map(([label,href])=><Link key={href} href={href} aria-current={active(href)?'page':undefined} className={active(href)?'active':''}>{label}</Link>)}
         </nav>
         <div className="nav-actions">
-          <Link className="nav-cta" href="/contact">Start a Project <ArrowUpRight size={15}/></Link>
+          <Link className="nav-cta" href="/contact">Start Project <ArrowUpRight size={15}/></Link>
           <button className="menu-toggle" onClick={()=>setOpen(v=>!v)} aria-label={open?'Close navigation':'Open navigation'} aria-expanded={open} aria-controls="mobile-navigation">{open?<X size={21}/>:<Menu size={21}/>}</button>
         </div>
       </div>

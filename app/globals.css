@@ -672,65 +672,93 @@ body{background:#fff;color:var(--studio-ink)}
   .scope-switcher{gap:3px!important;padding:3px!important}.scope-switcher button{padding:8px 2px!important;font-size:.56rem!important;letter-spacing:-.015em}
 }
 
-/* v14.1 responsive corrections — keep desktop heroes side-by-side and mobile process labels above the timeline. */
+/* v14.2 final responsive + funnel polish ----------------------------------
+   - More breathing room between hero copy and live visual on desktop/laptop.
+   - Desktop Contact navigation restored without crowding.
+   - Process labels stay above the timeline on desktop and mobile.
+   - Reveals trigger early and complete quickly with no nested stagger lag.
+*/
+
+/* Desktop navigation: six clear destinations + one primary action. */
+.studio-header .desktop-nav{gap:2px!important}
+.studio-header .desktop-nav a{padding:8px 10px!important;font-size:.77rem!important}
+.studio-header .nav-cta{padding:10px 13px!important;white-space:nowrap!important}
+
+/* Primary hero composition: preserve a deliberate visual gutter. */
+@media (min-width:1081px){
+  .hero,.page-hero{
+    grid-template-columns:minmax(0,.95fr) minmax(440px,1fr)!important;
+    column-gap:clamp(76px,7.2vw,112px)!important;
+  }
+  .hero-copy,.page-hero-copy{max-width:650px!important}
+  .hero-media,.page-hero-media{min-width:0!important}
+  .service-detail-head,.case-hero-grid{
+    grid-template-columns:minmax(0,.96fr) minmax(420px,1.04fr)!important;
+    column-gap:clamp(72px,6.6vw,104px)!important;
+  }
+}
+
+/* Laptops: remain side-by-side, but do not squeeze copy against artwork. */
 @media (min-width:861px) and (max-width:1080px){
   .hero,.page-hero{
-    display:grid!important;
-    grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)!important;
-    gap:clamp(28px,4vw,44px)!important;
-    align-items:center!important;
+    grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr)!important;
+    gap:clamp(48px,5.2vw,62px)!important;
   }
-  .hero-copy,.page-hero-copy{max-width:620px!important}
-  .hero h1,.page-hero h1{font-size:clamp(2.9rem,5vw,4.55rem)!important}
-  .hero-media,.page-hero-media{width:100%!important;margin:0!important;min-width:0!important}
-  .studio-hero-system{min-height:455px!important}
-  .studio-browser{height:398px!important}
-  .studio-scene{height:352px!important}
-
+  .hero-copy,.page-hero-copy{max-width:560px!important}
+  .hero h1,.page-hero h1{font-size:clamp(2.75rem,4.55vw,4.15rem)!important}
+  .studio-hero-system{min-height:435px!important}
+  .studio-browser{height:380px!important}
+  .studio-scene{height:334px!important}
   .service-detail-head,.case-hero-grid{
-    display:grid!important;
-    grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr)!important;
-    gap:clamp(28px,4vw,42px)!important;
-    align-items:center!important;
+    grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr)!important;
+    gap:clamp(46px,5vw,60px)!important;
   }
-  .service-detail-copy,.case-head{min-width:0!important}
-  .service-detail-visual,.case-hero-media{max-width:none!important;min-width:0!important;width:100%!important}
-  .service-detail-copy>h1,.case-head h1{font-size:clamp(2.7rem,4.7vw,4.25rem)!important}
+  .service-detail-copy>h1,.case-head h1{font-size:clamp(2.6rem,4.35vw,3.95rem)!important}
+}
+
+/* Process hero timeline: labels above, dots on line, supporting copy below. */
+@media (min-width:721px){
+  .process-live-line{top:210px!important}
+  .process-live-step{top:144px!important;width:108px!important;min-height:112px!important}
+  .process-live-step span{font-size:.54rem!important;line-height:1!important}
+  .process-live-step b{position:relative!important;z-index:3!important;margin-top:6px!important;font-size:.66rem!important;line-height:1.08!important;white-space:nowrap!important}
+  .process-live-step::before{position:absolute!important;left:50%!important;top:61px!important;width:12px!important;height:12px!important;margin:0!important;transform:translateX(-50%)!important}
+  .process-live-step small{margin-top:55px!important;font-size:.44rem!important;line-height:1.2!important}
 }
 
 @media (max-width:720px){
-  .process-scene{padding-inline:10px!important}
-  .process-current{top:34px!important}
-  .process-live-line{left:29px!important;right:29px!important;top:181px!important}
-  .process-live-step{
-    top:127px!important;
-    width:66px!important;
-    min-height:58px!important;
-    display:block!important;
-  }
-  .process-live-step span{font-size:.48rem!important;line-height:1!important}
-  .process-live-step b{
-    position:relative!important;
-    z-index:3!important;
-    margin-top:5px!important;
-    font-size:.54rem!important;
-    line-height:1.05!important;
-    white-space:nowrap!important;
-  }
-  .process-live-step::before{
-    position:absolute!important;
-    left:50%!important;
-    top:48px!important;
-    width:10px!important;
-    height:10px!important;
-    margin:0!important;
-    transform:translateX(-50%)!important;
-  }
-  .process-live-step small{display:none!important}
+  .process-live-step::before{top:49px!important}
 }
 
-@media (max-width:390px){
-  .process-live-line{left:24px!important;right:24px!important}
-  .process-live-step{width:60px!important}
-  .process-live-step b{font-size:.49rem!important;letter-spacing:-.02em!important}
+/* Reveal once the content is approaching the viewport. No nested wait. */
+.reveal{
+  opacity:0!important;
+  transform:translateY(8px)!important;
+  transition:opacity .22s cubic-bezier(.2,.76,.2,1),transform .22s cubic-bezier(.2,.76,.2,1)!important;
+}
+.reveal.is-visible{opacity:1!important;transform:none!important}
+.reveal .pain-grid>article,
+.reveal .home-service-grid>*,
+.reveal .benefit-grid>article,
+.reveal .reason-grid>article,
+.reveal .capability-grid>article,
+.reveal .about-method-grid>article,
+.reveal .contact-next-grid>article,
+.reveal .process-flow>article{
+  opacity:1!important;
+  transform:none!important;
+  transition:none!important;
+  transition-delay:0s!important;
+}
+
+/* Route change should feel instant rather than waiting behind a page fade. */
+.route-experience{animation:routeStudioIn .18s cubic-bezier(.2,.76,.2,1) both!important}
+.route-experience::before{animation:routeLine .24s cubic-bezier(.2,.8,.2,1) both!important}
+
+/* Keep the desktop navbar usable on compact laptop widths without dropping Contact. */
+@media (min-width:721px) and (max-width:930px){
+  .site-header.studio-header{width:calc(100% - 24px)!important}
+  .studio-header .nav-inner{padding-inline:10px!important}
+  .studio-header .desktop-nav a{padding:7px 7px!important;font-size:.7rem!important}
+  .studio-header .nav-cta{padding:9px 10px!important;font-size:.68rem!important}
 }

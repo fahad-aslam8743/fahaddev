@@ -1,38 +1,43 @@
-# FahadDev v13 — White Studio Live
+# FahadDev v14.2 — Final Funnel & Responsive Polish
 
-This release rebuilds the public experience around a restrained, modern studio direction while preserving the working FahadDev business systems from v10/v12.
+This release keeps the v13/v14 White Studio direction and all working business/admin systems, while correcting the final responsive and motion issues reported during review.
 
-## Design direction
+## What changed
 
-- White, editorial studio theme with restrained cobalt/cyan accents.
-- Rounded floating navigation that never touches the viewport edges.
-- Mobile hamburger opens a contained dropdown below the navbar; links reveal downward one by one.
-- Every public page begins at the top after route navigation.
-- Purposeful route entrances and scroll reveals without blur-heavy or constant motion.
-- Live product-style hero systems on Home, Work, Services, Process, About, Contact and Privacy.
-- Real featured project screenshot from the project CMS is used in the Home hero automatically when available.
-- Interactive project-type showcase explains what the customer gets and what the business/team gets.
-- Scroll-linked process story turns delivery stages into a visible product narrative.
-- Responsive, left-aligned mobile reading flow retained.
-- `prefers-reduced-motion` support retained.
+- Desktop Contact link restored in the rounded navbar.
+- Primary nav spacing tightened carefully so Contact and the main `Start Project` action can coexist without crowding.
+- Desktop and laptop heroes keep copy on the left and the live product visual on the right.
+- Hero copy/visual gutter increased substantially to restore breathing room.
+- Laptop hero heading size is reduced slightly so the composition stays premium rather than compressed.
+- Service-detail and case-study heroes receive the same spacing treatment.
+- Process hero stage titles stay above the timeline on desktop and mobile.
+- Timeline dots are positioned directly on the connector line using stable absolute geometry rather than margin tricks.
+- Reveal sections trigger well before entering the viewport and complete in ~220ms.
+- Nested card stagger delays were removed so content no longer appears to wait after its section is already visible.
+- Route-entry motion was shortened while the scroll-to-top behavior remains intact.
+- Home's four project-type controls remain one row on mobile with no horizontal scrollbar.
 
-## Business systems preserved
+## Funnel structure retained
 
-- Supabase lead inbox.
+The site remains a hybrid funnel: Home answers the majority of buyer questions in one scroll, while service-detail pages and case studies provide deeper proof and SEO landing destinations.
+
+The working conversion/admin systems remain unchanged:
+
+- Lead capture stored in Supabase.
 - Phone / WhatsApp capture.
-- Gmail, WhatsApp and Call actions in Admin.
+- Gmail, WhatsApp and Call reply actions in Admin.
 - Lead pipeline statuses.
 - Moderated reviews: pending, approve, edit, unpublish and delete.
-- Projects CMS: create, edit, publish/hide, reorder and delete.
-- Project image upload via Supabase Storage.
+- Projects CMS: add, edit, publish/hide, reorder and delete.
+- Project screenshot upload via Supabase Storage.
 - Project images reused across Home, Work and case studies.
-- SEO metadata, sitemap, service pages and privacy page.
+- Dedicated service pages, sitemap, robots, metadata and privacy page.
 
 ## Supabase
 
-No new database migration is required for v13 if v10/v12 is already working.
+No new database migration is required if v10+ is already working.
 
-If upgrading from an older build that does not yet have phone capture, run:
+If your database predates phone capture, run once:
 
 ```sql
 alter table public.leads
@@ -48,21 +53,14 @@ ADMIN_PASSWORD=choose_a_private_admin_password
 NEXT_PUBLIC_SITE_URL=https://your-production-domain.com
 ```
 
-Never expose `SUPABASE_SERVICE_ROLE_KEY` in client-side code.
+Never expose `SUPABASE_SERVICE_ROLE_KEY` in browser/client code.
 
-## Run locally
+## Local / production check
 
 ```bash
 npm install
+npm run build
 npm run dev
 ```
 
-Production compile:
-
-```bash
-npm run build
-```
-
-## Release validation
-
-The release was source-audited for TS/TSX syntax, internal routes, local imports/assets and CSS structure. A complete `next build` could not be executed in the packaging environment because package installation could not complete there, so Vercel or your local machine remains the final compiler check.
+The package received a deterministic source audit for TS/TSX parsing, routes, internal links, local assets, CSS structure and the critical funnel/admin paths. The complete Next.js production build still requires installed project dependencies, so Vercel or a local `npm install && npm run build` remains the final compiler/runtime check.
