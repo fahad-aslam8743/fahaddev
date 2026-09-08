@@ -142,7 +142,7 @@ export default async function Home() {
                   <div>
                     <h3>{title}</h3>
                     <p>{text}</p>
-                    <span><Check size={14} /> <b>You get:</b> {gets}</span>
+                    <span className="launch-benefit-get"><Check size={14} /><span><b>You get:</b> {gets}</span></span>
                   </div>
                 </article>
               ))}
