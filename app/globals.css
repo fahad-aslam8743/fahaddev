@@ -1567,3 +1567,196 @@ main h3{color:#161a22!important}
   .photo-hero-background{background-size:cover!important;background-position:center bottom!important}
   .engine-hero-copy h1,.engine-page-hero .engine-hero-copy h1,.engine-service-detail-hero .engine-hero-copy h1,.engine-case-hero .engine-hero-copy h1{font-size:clamp(2rem,9.4vw,2.58rem)!important}
 }
+
+/* === V18 — desktop artwork first, text-only mobile heroes ===
+   The generated hero scenes are desktop presentation art. On mobile we remove
+   them completely so the first screen stays focused, fast and readable. */
+@media (min-width:761px){
+  .engine-hero-section{
+    min-height:clamp(590px,66vh,720px)!important;
+  }
+  .engine-home-hero{min-height:clamp(620px,70vh,750px)!important}
+  .engine-page-hero{min-height:clamp(570px,64vh,690px)!important}
+  .engine-service-detail-hero,.engine-case-hero{min-height:clamp(590px,66vh,710px)!important}
+
+  .engine-hero-content{
+    min-height:inherit!important;
+    padding:clamp(58px,6vw,82px) 0!important;
+    align-items:center!important;
+  }
+
+  /* Give the generated artwork most of the canvas. */
+  .engine-hero-copy,
+  .engine-home-hero .engine-hero-copy{
+    width:min(590px,43%)!important;
+    max-width:590px!important;
+  }
+  .engine-home-hero .engine-hero-copy{width:min(610px,44%)!important;max-width:610px!important}
+
+  .engine-hero-copy h1{
+    max-width:600px!important;
+    font-size:clamp(2.85rem,4.15vw,4.65rem)!important;
+    line-height:.98!important;
+    letter-spacing:-.055em!important;
+    margin:15px 0 17px!important;
+  }
+  .engine-page-hero .engine-hero-copy h1,
+  .engine-service-detail-hero .engine-hero-copy h1{
+    font-size:clamp(2.7rem,3.8vw,4.25rem)!important;
+  }
+  .engine-case-hero .engine-hero-copy h1{
+    font-size:clamp(2.9rem,4vw,4.45rem)!important;
+  }
+  .engine-hero-copy>p,.engine-hero-copy .lead{
+    max-width:560px!important;
+    font-size:clamp(.96rem,1.04vw,1.07rem)!important;
+    line-height:1.58!important;
+  }
+  .engine-hero-copy .hero-actions{margin-top:23px!important}
+  .engine-hero-copy .microproof{margin-top:13px!important}
+  .engine-hero-copy .hero-proof-row{margin-top:14px!important;padding-top:14px!important}
+
+  /* Keep the left copy readable without washing out the artwork. */
+  .photo-hero-background::before{
+    background:linear-gradient(90deg,
+      rgba(250,251,253,.995) 0%,
+      rgba(250,251,253,.985) 24%,
+      rgba(250,251,253,.90) 34%,
+      rgba(250,251,253,.52) 43%,
+      rgba(250,251,253,.14) 51%,
+      rgba(250,251,253,0) 59%)!important;
+  }
+  .photo-hero-vignette{
+    background:linear-gradient(90deg,rgba(255,255,255,.08),transparent 46%)!important;
+  }
+
+  /* Preserve the generated composition rather than zooming into it. */
+  .photo-hero-background{
+    background-size:cover!important;
+    background-repeat:no-repeat!important;
+  }
+  .photo-home{background-position:52% center!important}
+  .photo-services{background-position:54% center!important}
+  .photo-work{background-position:55% center!important}
+  .photo-process{background-position:56% center!important}
+  .photo-about{background-position:55% center!important}
+  .photo-contact{background-position:55% center!important}
+  .photo-privacy{background-position:55% center!important}
+  .photo-ecommerce,.photo-dashboard,.photo-webapp,.photo-improvements{background-position:55% center!important}
+
+  /* Case-study uploaded artwork can be busier: give the copy a restrained local veil. */
+  .engine-case-hero .engine-hero-copy{
+    width:min(570px,42%)!important;
+    background:rgba(255,255,255,.82)!important;
+    border:1px solid rgba(255,255,255,.78)!important;
+    box-shadow:0 18px 46px rgba(18,28,44,.08)!important;
+    backdrop-filter:blur(12px)!important;
+    -webkit-backdrop-filter:blur(12px)!important;
+    padding:22px!important;
+    border-radius:20px!important;
+  }
+}
+
+/* Smaller laptops still keep the art visible instead of allowing the copy to spread. */
+@media (min-width:761px) and (max-width:1080px){
+  .engine-hero-copy,.engine-home-hero .engine-hero-copy{
+    width:min(500px,46%)!important;
+    max-width:500px!important;
+  }
+  .engine-hero-copy h1{
+    font-size:clamp(2.45rem,4.7vw,3.55rem)!important;
+  }
+  .engine-page-hero .engine-hero-copy h1,
+  .engine-service-detail-hero .engine-hero-copy h1,
+  .engine-case-hero .engine-hero-copy h1{
+    font-size:clamp(2.35rem,4.45vw,3.35rem)!important;
+  }
+  .engine-hero-copy>p,.engine-hero-copy .lead{font-size:.92rem!important;line-height:1.5!important}
+  .photo-hero-background::before{
+    background:linear-gradient(90deg,rgba(250,251,253,.995) 0%,rgba(250,251,253,.97) 29%,rgba(250,251,253,.78) 39%,rgba(250,251,253,.30) 48%,transparent 58%)!important;
+  }
+}
+
+/* Mobile: no hero artwork at all. Text + action only. */
+@media (max-width:760px){
+  .engine-hero-section,
+  .engine-home-hero,.engine-page-hero,.engine-service-detail-hero,.engine-case-hero{
+    min-height:auto!important;
+    background:#fff!important;
+    overflow:visible!important;
+  }
+  .photo-hero-background{
+    display:none!important;
+    background-image:none!important;
+  }
+  .engine-hero-content{
+    min-height:auto!important;
+    padding:36px 0 42px!important;
+    align-items:flex-start!important;
+  }
+  .engine-home-hero .engine-hero-content{padding-top:34px!important;padding-bottom:44px!important}
+  .engine-hero-copy,.engine-home-hero .engine-hero-copy,
+  .engine-case-hero .engine-hero-copy{
+    width:100%!important;
+    max-width:none!important;
+    background:transparent!important;
+    border:0!important;
+    box-shadow:none!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+    padding:0!important;
+    border-radius:0!important;
+  }
+  .engine-hero-copy h1,
+  .engine-page-hero .engine-hero-copy h1,
+  .engine-service-detail-hero .engine-hero-copy h1,
+  .engine-case-hero .engine-hero-copy h1{
+    font-size:clamp(2.15rem,9.7vw,3rem)!important;
+    line-height:.98!important;
+    letter-spacing:-.055em!important;
+    margin:12px 0 14px!important;
+    max-width:100%!important;
+  }
+  .engine-hero-copy>p,.engine-hero-copy .lead{
+    max-width:100%!important;
+    font-size:.91rem!important;
+    line-height:1.53!important;
+  }
+  .engine-hero-copy .hero-actions{
+    margin-top:19px!important;
+    display:grid!important;
+    grid-template-columns:1fr 1fr!important;
+    gap:8px!important;
+  }
+  .engine-hero-copy .hero-actions .btn{
+    min-height:42px!important;
+    padding:9px 8px!important;
+    font-size:.64rem!important;
+    justify-content:center!important;
+    text-align:center!important;
+  }
+  .engine-hero-copy>.eyebrow,.engine-hero-copy .eyebrow{
+    background:#f5f7fa!important;
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+  /* Keep mobile heroes purposeful rather than stretching the first screen. */
+  .engine-hero-copy .microproof,
+  .engine-hero-copy .hero-proof-row,
+  .engine-service-detail-hero .service-best-fit{
+    display:none!important;
+  }
+  .engine-hero-copy .case-meta{margin-top:15px!important}
+}
+
+@media (max-width:430px){
+  .engine-hero-content{padding:31px 0 37px!important}
+  .engine-hero-copy h1,
+  .engine-page-hero .engine-hero-copy h1,
+  .engine-service-detail-hero .engine-hero-copy h1,
+  .engine-case-hero .engine-hero-copy h1{
+    font-size:clamp(2.05rem,10vw,2.7rem)!important;
+  }
+  .engine-hero-copy .hero-actions{grid-template-columns:1fr!important}
+  .engine-hero-copy .hero-actions .btn{width:100%!important}
+}
