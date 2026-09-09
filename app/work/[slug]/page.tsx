@@ -18,7 +18,7 @@ export default async function CaseStudy({params}:{params:Promise<{slug:string}>}
   return <article className="case">
     <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,'\\u003c')}}/>
     <section className="engine-hero-section engine-case-hero">
-      <HeroSystem kind="work" context={`${p.title} ${p.clientType}`}/>
+      <HeroSystem kind="work" context={`${p.title} ${p.clientType}`} imageUrl={p.imageUrl}/>
       <div className="shell engine-hero-content">
         <div className="engine-hero-copy case-head">
           <nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/work">Work</Link><span>/</span><span>{p.title}</span></nav>
