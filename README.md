@@ -1,50 +1,23 @@
-# FahadDev v15 — Human Studio Hero System
+# FahadDev v16 — Coded Background Heroes
 
-This release uses the supplied visual reference as a composition benchmark, not as a copied design.
+This release replaces the v15 photographic/split-column hero system with a fully coded, background-led hero system.
 
 ## What changed
-
-- Floating rounded navigation with spacing from every screen edge.
-- Primary CTA and major public headings now use one restrained blue → indigo → violet gradient identity.
-- Home hero rebuilt around a bright studio scene and a product/browser composition.
-- If an Admin-uploaded featured project screenshot exists, Home places the real project inside the hero browser.
-- Work, Services, Process, About, Contact and Privacy each have their own hero background and their own explanatory scene.
-- Service-detail heroes vary their visual background according to service type.
-- Case-study fallback heroes vary by project; uploaded project screenshots remain the preferred case-study image.
-- Mobile hero is intentionally compact: smaller editorial headline, compact two-button row, no breadcrumb/microproof clutter, and a capped visual height.
-- Existing funnel, Supabase, leads, review moderation, project CMS and admin behavior are unchanged.
-
-## Mobile behavior
-
-The mobile hero is not a shrunk desktop hero. At phone widths:
-
-- navigation stays inset and rounded;
-- copy remains left aligned;
-- breadcrumbs and redundant proof rows are removed from the first screen;
-- two hero actions remain compact;
-- the hero artwork is capped around 214–278px depending on viewport height;
-- content is never clipped because the hero uses min-height, not a fixed page height.
+- All public hero headings are black again.
+- Primary buttons keep a restrained blue/indigo/violet accent; gradients are no longer used as headline text.
+- Home, Work, Services, Process, About, Contact and Privacy each use a different coded hero scene.
+- Service-detail pages adapt the hero scene to commerce, dashboard/internal tools, full-stack apps or improvement work.
+- Case-study heroes use project context and visual variants instead of reusing a generic hero image.
+- Hero content now sits on top of the visual background instead of next to a separate media column.
+- Old `/public/heroes-v15` photographic assets were removed.
+- Mobile heroes use a dedicated lower-background composition and a compact short-phone mode.
+- Existing admin, leads, review moderation, projects CMS and Supabase behavior remain unchanged.
 
 ## Database
+No new Supabase migration is required.
 
-No new Supabase migration is required when upgrading from v14.5.
+## Environment
+Use the same environment variables as the previous working release.
 
-## Required environment variables
-
-Use the same environment variables as the previous build:
-
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `ADMIN_PASSWORD`
-- `NEXT_PUBLIC_SITE_URL`
-
-## Final production check
-
-Run:
-
-```bash
-npm install
-npm run build
-```
-
-Then deploy the successful build to Vercel.
+## Final build check
+Source-level syntax, routes, assets and CSS were audited. A full `npm install` could not complete in the build workspace due registry/network timeout, so run `npm install && npm run build` locally or let Vercel perform the final compiler/runtime check.

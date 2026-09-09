@@ -1,113 +1,114 @@
-import Image from 'next/image';
+import type { CSSProperties } from 'react';
 import {
   ArrowUpRight,
   Check,
   Code2,
   Database,
+  FileText,
   LayoutDashboard,
+  LockKeyhole,
   Mail,
   MessageCircle,
+  PackageCheck,
   Rocket,
   ShieldCheck,
   ShoppingBag,
-  Smartphone,
+  Sparkles,
+  Users,
+  Wrench,
 } from 'lucide-react';
 
 type Kind='home'|'work'|'services'|'process'|'about'|'contact'|'privacy';
 
-const heroImage:Record<Kind,string>={
-  home:'/heroes-v15/home.jpg',
-  work:'/heroes-v15/work.jpg',
-  services:'/heroes-v15/services.jpg',
-  process:'/heroes-v15/process.jpg',
-  about:'/heroes-v15/about.jpg',
-  contact:'/heroes-v15/contact.jpg',
-  privacy:'/heroes-v15/privacy.jpg',
+type ServiceScene = {
+  label:string;
+  icon:typeof ShoppingBag;
+  items:[string,string,string,string];
 };
 
-function Chrome({label}:{label:string}){return <div className="ref-browser-chrome"><span/><span/><span/><b>{label}</b><i>↗</i></div>}
+const serviceScene=(context?:string):ServiceScene=>{
+  const value=(context||'').toLowerCase();
+  if(value.includes('commerce'))return {label:'Commerce engine',icon:ShoppingBag,items:['Products','Content','Checkout','Orders']};
+  if(value.includes('dashboard')||value.includes('tool'))return {label:'Operations engine',icon:LayoutDashboard,items:['Metrics','Roles','Search','Actions']};
+  if(value.includes('full')||value.includes('app'))return {label:'Product engine',icon:Code2,items:['Interface','Auth','API','Database']};
+  if(value.includes('improve')||value.includes('existing'))return {label:'Improvement engine',icon:Wrench,items:['Audit','Prioritise','Fix','Verify']};
+  return {label:'Connected build',icon:Code2,items:['Experience','Content','Data','Launch']};
+};
 
-function HomeVisual({imageUrl,context}:{imageUrl?:string|null;context?:string}){
-  return <>
-    <div className="ref-browser ref-browser-home">
-      <Chrome label="fahaddev · featured build"/>
-      <div className="ref-browser-screen">
-        {imageUrl?<Image src={imageUrl} alt={`${context||'Featured'} project preview`} fill priority sizes="(max-width: 760px) 82vw, 520px"/>:<div className="ref-demo-site">
-          <div className="ref-demo-nav"><b>Atelier.</b><span>Work</span><span>About</span><i>Menu</i></div>
-          <div className="ref-demo-copy"><small>Designed to be understood</small><strong>Beautiful outside.<br/>Useful underneath.</strong><button>Explore <ArrowUpRight size={12}/></button></div>
-          <div className="ref-demo-object"><i/><i/><i/></div>
-        </div>}
-      </div>
+function HomeScene(){return <div className="engine-scene engine-scene-home">
+  <div className="engine-home-browser">
+    <div className="engine-browser-top"><i/><i/><i/><span>fahaddev.com</span></div>
+    <div className="engine-home-ui">
+      <div className="engine-ui-nav"><b>Brand</b><span>Work</span><span>About</span><span>Contact</span></div>
+      <div className="engine-ui-copy"><small>Clear offer. Clear next step.</small><strong>A website people understand.</strong><div><span/><span/></div></div>
+      <div className="engine-ui-object"><i/><i/><i/></div>
     </div>
-    <div className="ref-float-card ref-float-a"><Database/><span><small>CMS + admin</small><b>Update without code</b></span></div>
-    <div className="ref-float-card ref-float-b"><Smartphone/><span><small>Responsive</small><b>Built around real phones</b></span></div>
-    <div className="ref-status"><i/><span><b>Production ready</b><small>design · system · launch</small></span></div>
-  </>;
-}
-
-function WorkVisual(){return <>
-  <div className="ref-work-stack">
-    <div className="ref-work-card card-one"><span>01</span><small>Organization platform</small><b>Public experience + admin workflows</b><div><i/><i/><i/></div></div>
-    <div className="ref-work-card card-two"><span>02</span><small>Commerce</small><b>Storefront + content + checkout</b><div><i/><i/><i/></div></div>
-    <div className="ref-work-card card-three"><span>03</span><small>Product system</small><b>Interface + data + operations</b><div><i/><i/><i/></div></div>
   </div>
-  <div className="ref-proof-chip"><Check/><span><small>Proof over decoration</small><b>Problem → build → result</b></span></div>
-</>}
+  <div className="engine-float engine-float-one"><Database/><span><small>CMS</small><b>Editable content</b></span></div>
+  <div className="engine-float engine-float-two"><MessageCircle/><span><small>Leads</small><b>Email + WhatsApp</b></span></div>
+  <div className="engine-float engine-float-three"><Rocket/><span><small>Launch</small><b>Production ready</b></span></div>
+  <svg className="engine-connectors" viewBox="0 0 700 480" preserveAspectRatio="none"><path d="M370 150 C470 100 540 130 590 185"/><path d="M390 265 C510 280 520 335 586 350"/><path d="M285 320 C220 360 185 386 144 410"/></svg>
+</div>}
 
-function ServicesVisual({context}:{context?:string}){return <>
-  <div className="ref-service-core"><small>{context||'Connected web product'}</small><strong>One product.<br/>All the important layers.</strong></div>
-  <div className="ref-service-layer layer-1"><Code2/><span><small>Experience</small><b>UI + responsive flows</b></span></div>
-  <div className="ref-service-layer layer-2"><Database/><span><small>System</small><b>CMS + data + auth</b></span></div>
-  <div className="ref-service-layer layer-3"><ShoppingBag/><span><small>Business</small><b>Leads + payments + admin</b></span></div>
-  <div className="ref-service-layer layer-4"><Rocket/><span><small>Launch</small><b>Domain + deployment + ownership</b></span></div>
-</>}
+function WorkScene({context}:{context?:string}){return <div className="engine-scene engine-scene-work">
+  <div className="engine-work-index"><span>Selected work</span><b>{context||'Systems built around real problems'}</b></div>
+  <div className="engine-work-card engine-work-a"><small>01 / Challenge</small><strong>Make the problem visible.</strong><i/></div>
+  <div className="engine-work-card engine-work-b"><small>02 / System</small><strong>Connect the useful parts.</strong><div><span/><span/><span/></div></div>
+  <div className="engine-work-card engine-work-c"><small>03 / Outcome</small><strong>Leave a product people can operate.</strong><Check/></div>
+  <div className="engine-work-watermark">CASE<br/>STUDY</div>
+</div>}
 
-function ProcessVisual(){const steps=['Understand','Shape','Build','Verify','Launch'];return <>
-  <div className="ref-process-board"><small>Visible delivery</small><strong>Nothing important disappears into a black box.</strong><div className="ref-process-line">{steps.map((s,i)=><div key={s}><span>{String(i+1).padStart(2,'0')}</span><i/><b>{s}</b></div>)}</div></div>
-  <div className="ref-process-note"><LayoutDashboard/><span><small>Client view</small><b>Working checkpoints, not vague updates</b></span></div>
-</>}
-
-function AboutVisual(){return <>
-  <div className="ref-about-card"><div className="ref-about-monogram">FA</div><div><small>FahadDev</small><strong>One builder from the first product question to production.</strong></div></div>
-  <div className="ref-about-principles"><span><b>01</b>Understand the business</span><span><b>02</b>Build the right system</span><span><b>03</b>Hand over cleanly</span></div>
-  <div className="ref-about-tools"><Code2/><Database/><LayoutDashboard/><Rocket/></div>
-</>}
-
-function ContactVisual(){return <>
-  <div className="ref-message ref-message-client"><small>Project enquiry</small><b>“Our website looks fine, but mobile visitors are not converting.”</b></div>
-  <div className="ref-message ref-message-reply"><small>FahadDev</small><b>“Send the URL. I’ll start with the friction before recommending a rebuild.”</b></div>
-  <div className="ref-contact-actions"><span><Mail/><b>Email</b></span><span><MessageCircle/><b>WhatsApp</b></span></div>
-</>}
-
-function PrivacyVisual(){return <>
-  <div className="ref-privacy-card"><ShieldCheck/><span><small>Project information</small><strong>Only used to understand and reply to the conversation you started.</strong></span></div>
-  <div className="ref-privacy-flow"><span>Send context</span><i/><span>Private review</span><i/><span>Reply</span></div>
-</>}
-
-function resolveHeroImage(kind:Kind,context?:string){
-  if(kind==='services'&&context){
-    const c=context.toLowerCase();
-    if(c.includes('commerce'))return heroImage.work;
-    if(c.includes('dashboard')||c.includes('tool'))return heroImage.services;
-    if(c.includes('full')||c.includes('app'))return heroImage.process;
-    if(c.includes('improve')||c.includes('existing'))return heroImage.about;
-  }
-  if(kind==='work'&&context){
-    const choices=[heroImage.work,heroImage.home,heroImage.services,heroImage.about];
-    let n=0;for(const ch of context)n=(n+ch.charCodeAt(0))%choices.length;
-    return choices[n];
-  }
-  return heroImage[kind];
+function ServicesScene({context}:{context?:string}){
+  const scene=serviceScene(context);const Icon=scene.icon;
+  return <div className={`engine-scene engine-scene-services engine-service-${scene.label.toLowerCase().replace(/\s+/g,'-')}`}>
+    <div className="engine-service-core"><Icon/><span><small>{scene.label}</small><b>One connected product</b></span></div>
+    <div className="engine-service-orbit orbit-a"><span>{scene.items[0]}</span></div>
+    <div className="engine-service-orbit orbit-b"><span>{scene.items[1]}</span></div>
+    <div className="engine-service-orbit orbit-c"><span>{scene.items[2]}</span></div>
+    <div className="engine-service-orbit orbit-d"><span>{scene.items[3]}</span></div>
+    <svg className="engine-orbit-lines" viewBox="0 0 700 480" preserveAspectRatio="none"><circle cx="465" cy="240" r="108"/><circle cx="465" cy="240" r="170"/><path d="M465 72V408M297 240H633"/></svg>
+  </div>
 }
 
-export function HeroSystem({kind='home',context,imageUrl}:{kind?:Kind;context?:string;imageUrl?:string|null}){
-  const background=resolveHeroImage(kind,context);
-  return <figure className={`ref-hero-visual ref-hero-${kind}`}>
-    <Image className="ref-hero-photo" src={background} alt="" fill priority={kind==='home'} sizes="(max-width: 860px) 94vw, 48vw"/>
-    <div className="ref-hero-photo-wash"/>
-    <div className="ref-hero-scene">
-      {kind==='home'?<HomeVisual imageUrl={imageUrl} context={context}/>:kind==='work'?<WorkVisual/>:kind==='services'?<ServicesVisual context={context}/>:kind==='process'?<ProcessVisual/>:kind==='about'?<AboutVisual/>:kind==='contact'?<ContactVisual/>:<PrivacyVisual/>}
-    </div>
-    <figcaption><span>FahadDev</span><b>{kind==='home'?'Design + build + launch':kind==='work'?'Selected work':kind==='services'?'Connected development':kind==='process'?'Clear delivery':kind==='about'?'Direct builder':kind==='contact'?'Start a project':'Privacy by design'}</b></figcaption>
-  </figure>;
+function ProcessScene(){const steps=['Understand','Shape','Build','Verify','Launch'];return <div className="engine-scene engine-scene-process">
+  <div className="engine-process-header"><small>Delivery engine</small><b>Visible from first question to production.</b></div>
+  <svg className="engine-process-path" viewBox="0 0 700 470" preserveAspectRatio="none"><path d="M135 365 C220 330 225 205 320 220 S445 330 515 275 S570 145 625 125"/></svg>
+  <div className="engine-process-stops">{steps.map((step,i)=><div key={step} style={{'--step':i} as CSSProperties}><span>{String(i+1).padStart(2,'0')}</span><i/><b>{step}</b></div>)}</div>
+  <div className="engine-process-proof"><PackageCheck/><span><small>At every stage</small><b>Something concrete to review</b></span></div>
+</div>}
+
+function AboutScene(){return <div className="engine-scene engine-scene-about">
+  <div className="engine-about-signature"><div>FA</div><span><small>FahadDev</small><b>One builder. Full product context.</b></span></div>
+  <div className="engine-about-card about-card-a"><Sparkles/><span><small>Product thinking</small><b>Business goal before interface noise</b></span></div>
+  <div className="engine-about-card about-card-b"><Code2/><span><small>Full-stack</small><b>Frontend and system decisions stay connected</b></span></div>
+  <div className="engine-about-card about-card-c"><Users/><span><small>Direct relationship</small><b>No account-manager handoff</b></span></div>
+  <div className="engine-about-card about-card-d"><ShieldCheck/><span><small>Ownership</small><b>Clean production handoff</b></span></div>
+  <div className="engine-about-line"/>
+</div>}
+
+function ContactScene(){return <div className="engine-scene engine-scene-contact">
+  <div className="engine-contact-message engine-contact-client"><small>Project enquiry</small><b>“Here is what is not working.”</b><span>mobile · conversion · workflow</span></div>
+  <div className="engine-contact-arrow"><ArrowUpRight/></div>
+  <div className="engine-contact-message engine-contact-reply"><small>Direct reply</small><b>“Here is the smallest useful next step.”</b><span>scope before commitment</span></div>
+  <div className="engine-contact-channel channel-mail"><Mail/><b>Email</b></div>
+  <div className="engine-contact-channel channel-wa"><MessageCircle/><b>WhatsApp</b></div>
+</div>}
+
+function PrivacyScene(){return <div className="engine-scene engine-scene-privacy">
+  <div className="engine-privacy-lock"><LockKeyhole/></div>
+  <div className="engine-privacy-card"><small>Project context</small><b>Collected only to understand and reply.</b></div>
+  <div className="engine-privacy-flow"><span><FileText/>You send</span><i/><span><ShieldCheck/>Private review</span><i/><span><Mail/>Reply</span></div>
+  <div className="engine-privacy-grid"><span/><span/><span/><span/><span/><span/></div>
+</div>}
+
+function sceneVariant(context?:string){
+  if(!context)return 0;let total=0;for(const ch of context)total+=ch.charCodeAt(0);return total%4;
+}
+
+export function HeroSystem({kind='home',context}:{kind?:Kind;context?:string;imageUrl?:string|null}){
+  const variant=sceneVariant(context);
+  return <div className={`engine-hero-background engine-${kind} engine-variant-${variant}`} aria-hidden="true">
+    <div className="engine-paper-grid"/><div className="engine-aura aura-one"/><div className="engine-aura aura-two"/>
+    {kind==='home'?<HomeScene/>:kind==='work'?<WorkScene context={context}/>:kind==='services'?<ServicesScene context={context}/>:kind==='process'?<ProcessScene/>:kind==='about'?<AboutScene/>:kind==='contact'?<ContactScene/>:<PrivacyScene/>}
+  </div>;
 }

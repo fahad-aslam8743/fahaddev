@@ -20,7 +20,19 @@ export default async function ServiceDetail({params}:{params:Promise<{slug:strin
   const Icon=service.icon;
   return <>
     <script type="application/ld+json" dangerouslySetInnerHTML={{__html:JSON.stringify(schema).replace(/</g,'\\u003c')}}/>
-    <section className="service-detail-hero"><div className="shell"><nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/services">Services</Link><span>/</span><span>{service.shortTitle}</span></nav><div className="service-detail-head"><div className="service-detail-copy"><span className="eyebrow">{service.eyebrow}</span><div className="hero-title-lockup"><h1>{service.title}</h1><span className="hero-title-rule" aria-hidden="true"/></div><p>{service.description}</p><div className="hero-actions"><Link className="btn" href="/contact">Discuss this project <ArrowRight size={17}/></Link><Link className="btn btn-secondary" href="/work">See related work</Link></div><div className="service-best-fit"><Icon/><div><span>Best fit</span><p>{service.bestFor}</p></div></div></div><div className="service-detail-visual"><HeroSystem kind="services" context={service.shortTitle}/></div></div></div></section>
+    <section className="engine-hero-section engine-service-detail-hero">
+      <HeroSystem kind="services" context={service.shortTitle}/>
+      <div className="shell engine-hero-content">
+        <div className="engine-hero-copy service-detail-copy">
+          <nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/services">Services</Link><span>/</span><span>{service.shortTitle}</span></nav>
+          <span className="eyebrow">{service.eyebrow}</span>
+          <h1>{service.title}</h1>
+          <p>{service.description}</p>
+          <div className="hero-actions"><Link className="btn" href="/contact">Discuss this project <ArrowRight size={17}/></Link><Link className="btn btn-secondary" href="/work">See related work</Link></div>
+          <div className="service-best-fit"><Icon/><div><span>Best fit</span><p>{service.bestFor}</p></div></div>
+        </div>
+      </div>
+    </section>
     <Reveal><section className="section shell concise-service-detail"><div><div className="section-head"><span className="eyebrow">What should improve</span><h2>The product should become easier to buy from, use or operate.</h2></div><div className="service-outcome-grid compact-outcomes">{service.outcomes.map((outcome,i)=><article key={outcome}><span>0{i+1}</span><p>{outcome}</p></article>)}</div></div><div className="service-included-panel"><span className="eyebrow">Typical scope</span><h2>Common pieces in this kind of build.</h2><ul>{service.deliverables.slice(0,6).map(item=><li key={item}><CheckCircle2/>{item}</li>)}</ul></div></section></Reveal>
     <FAQSection items={service.faqs} eyebrow={`${service.shortTitle} questions`} title="Useful answers before we decide the scope."/>
     <section className="cta-band"><div className="shell cta-band-inner"><div><span className="eyebrow">Think this is close to what you need?</span><h2>Send the current situation. I’ll help narrow it to the smallest useful next step.</h2></div><Link className="btn light-btn" href="/contact">Start with Your Project <ArrowRight size={17}/></Link></div></section>
