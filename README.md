@@ -1,23 +1,47 @@
-# FahadDev v16 — Coded Background Heroes
+# FahadDev v20 — Mobile Hero Elements + Service Depth
 
-This release replaces the v15 photographic/split-column hero system with a fully coded, background-led hero system.
+This release keeps the professional desktop two-column hero system from v19 and restores the coded hero elements on mobile in a compact, controlled format. It also expands all four service detail pages with much stronger trust-building information.
 
-## What changed
-- All public hero headings are black again.
-- Primary buttons keep a restrained blue/indigo/violet accent; gradients are no longer used as headline text.
-- Home, Work, Services, Process, About, Contact and Privacy each use a different coded hero scene.
-- Service-detail pages adapt the hero scene to commerce, dashboard/internal tools, full-stack apps or improvement work.
-- Case-study heroes use project context and visual variants instead of reusing a generic hero image.
-- Hero content now sits on top of the visual background instead of next to a separate media column.
-- Old `/public/heroes-v15` photographic assets were removed.
-- Mobile heroes use a dedicated lower-background composition and a compact short-phone mode.
-- Existing admin, leads, review moderation, projects CMS and Supabase behavior remain unchanged.
+## Hero behavior
+
+### Desktop / laptop
+- Copy remains on the left.
+- The coded live product visual remains on the right.
+- No generated hero photography is used.
+
+### Mobile / tablet
+- The coded hero element is visible again.
+- It is intentionally scaled and clipped as a compact product preview instead of becoming a second full-screen block.
+- The hero label is removed on mobile to reduce height and noise.
+- Copy and CTAs remain the priority.
+
+## Service pages
+
+Each service detail page now explains:
+- the business outcomes the work should improve;
+- the typical project scope;
+- how the project moves from discovery to launch;
+- what happens under the visible interface;
+- project-specific launch/quality checks;
+- what source/access/ownership the client keeps after handoff;
+- expanded FAQs.
+
+The four service routes remain:
+- `/services/ecommerce-development`
+- `/services/dashboard-development`
+- `/services/full-stack-web-app-development`
+- `/services/website-improvements`
+
+The main Services page also shows all four outcomes plus a short “usually includes” scope preview for each service.
 
 ## Database
-No new Supabase migration is required.
+
+No new Supabase migration is required. Leads, review moderation, project CMS, image uploads and admin behavior are unchanged.
 
 ## Environment
-Use the same environment variables as the previous working release.
 
-## Final build check
-Source-level syntax, routes, assets and CSS were audited. A full `npm install` could not complete in the build workspace due registry/network timeout, so run `npm install && npm run build` locally or let Vercel perform the final compiler/runtime check.
+Use the same environment variables as the current working deployment.
+
+## Final production check
+
+Source, routes and CSS were audited in this workspace. Dependencies are not installed here, so the final Next.js compiler/runtime check should still be `npm install && npm run build` locally or the Vercel production build.

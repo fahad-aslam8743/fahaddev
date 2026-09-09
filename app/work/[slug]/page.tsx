@@ -5,7 +5,7 @@ import Link from 'next/link';
 import {ArrowUpRight, CheckCircle2} from 'lucide-react';
 import {getProject,defaultProjects} from '@/lib/projects';
 import {pageMetadata,SITE_URL} from '@/lib/seo';
-import {HeroSystem} from '@/components/HeroSystem';
+import {HeroArtwork} from '@/components/HeroArtwork';
 
 export const dynamicParams=true;
 export function generateStaticParams(){return defaultProjects.map(p=>({slug:p.slug}))}
@@ -22,7 +22,7 @@ export default async function CaseStudy({params}:{params:Promise<{slug:string}>}
       <nav className="breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span>/</span><Link href="/work">Work</Link><span>/</span><span>{p.title}</span></nav>
       <div className="case-hero-grid">
         <div className="case-head">{p.concept&&<span className="concept">Concept study</span>}<span className="eyebrow">{p.clientType}</span><div className="hero-title-lockup"><h1>{p.title}</h1><span className="hero-title-rule" aria-hidden="true"/></div><p>{p.short}</p><div className="case-meta"><span>{p.timeline}</span><span>{p.stack.join(' · ')}</span></div>{p.liveUrl&&<a className="btn" href={p.liveUrl} target="_blank" rel="noreferrer">Visit live site <ArrowUpRight size={17}/></a>}</div>
-        <div className="case-hero-media">{p.imageUrl?<figure className="case-project-image hero-project-image"><Image src={p.imageUrl} alt={`${p.title} project screenshot`} fill priority sizes="(max-width: 900px) 100vw, 48vw"/><div className="case-image-chrome"><i/><i/><i/><span>{p.title}</span></div><figcaption><span>Project view</span><b>{p.concept?'Concept exploration':'Production work'}</b></figcaption></figure>:<HeroSystem kind="work" context={p.title}/>}</div>
+        <div className="case-hero-media">{p.imageUrl?<figure className="case-project-image hero-project-image"><Image src={p.imageUrl} alt={`${p.title} project screenshot`} fill priority sizes="(max-width: 900px) 100vw, 48vw"/><div className="case-image-chrome"><i/><i/><i/><span>{p.title}</span></div><figcaption><span>Project view</span><b>{p.concept?'Concept exploration':'Production work'}</b></figcaption></figure>:<HeroArtwork kind="work" alt={`${p.title} project visual`} priority/>}</div>
       </div>
     </div></section>
     <div className="shell case-body concise-case-body"><div className="case-content concise-case-content"><section><span>01</span><div><h2>The challenge</h2><p>{p.problem}</p></div></section><section><span>02</span><div><h2>What was built</h2><p>{p.approach}</p><p>{p.build}</p></div></section><section><span>03</span><div><h2>The result</h2><p>{p.result}</p></div></section></div><div className="case-cta"><div><span className="eyebrow">Have a similar challenge?</span><h2>Start with the business outcome, not a copied layout.</h2></div><Link className="btn" href="/contact">Discuss Your Project</Link></div></div>

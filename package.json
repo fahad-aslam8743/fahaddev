@@ -1,6 +1,6 @@
 {
-  "name": "fahaddev-v19-two-column-heroes",
-  "version": "19.0.0",
+  "name": "fahaddev-v20-mobile-heroes-service-depth",
+  "version": "21.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

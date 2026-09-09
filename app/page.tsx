@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { ProjectCard } from '@/components/ProjectCard';
 import { getFeaturedProjects } from '@/lib/projects';
-import { HeroSystem } from '@/components/HeroSystem';
+import { HeroArtwork } from '@/components/HeroArtwork';
 import { ProductShowcase } from '@/components/ProductShowcase';
 import { Testimonials } from '@/components/Testimonials';
 import { Reveal } from '@/components/Reveal';
@@ -116,11 +116,7 @@ export default async function Home() {
             </p>
           </Reveal>
           <Reveal className="hero-media">
-            <HeroSystem
-              kind="home"
-              imageUrl={featuredProjects[0]?.imageUrl}
-              context={featuredProjects[0]?.imageUrl ? featuredProjects[0]?.title : undefined}
-            />
+            <HeroArtwork kind="home" alt="FahadDev website design and development workspace" priority/>
           </Reveal>
         </div>
       </section>
