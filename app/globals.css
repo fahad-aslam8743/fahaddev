@@ -1760,3 +1760,138 @@ main h3{color:#161a22!important}
   .engine-hero-copy .hero-actions{grid-template-columns:1fr!important}
   .engine-hero-copy .hero-actions .btn{width:100%!important}
 }
+
+/* ============================================================
+   v19 — restored two-column studio heroes
+   Desktop/laptop: copy left, interactive element right.
+   Mobile/tablet: copy + CTAs only; hero visual is intentionally hidden.
+   ============================================================ */
+
+/* The photographic/background-hero experiment is retired. */
+.photo-hero-background,.photo-hero-vignette{display:none!important}
+
+/* Keep the latest rounded shell/navigation aesthetic, but restore true columns. */
+.home-hero-wrap,.page-hero-wrap,.service-detail-hero,.case-hero-wrap{
+  position:relative!important;
+  overflow:hidden!important;
+  background:
+    radial-gradient(circle at 84% 14%,rgba(71,107,255,.085),transparent 28%),
+    radial-gradient(circle at 18% 10%,rgba(255,255,255,.96),transparent 32%),
+    linear-gradient(180deg,#fbfcff 0%,#fff 100%)!important;
+}
+
+.hero,.page-hero{
+  display:grid!important;
+  grid-template-columns:minmax(0,.93fr) minmax(440px,1.07fr)!important;
+  gap:clamp(54px,6vw,92px)!important;
+  align-items:center!important;
+  min-height:clamp(600px,69vh,760px)!important;
+  padding:clamp(62px,6.6vw,88px) 0!important;
+}
+.hero-copy,.page-hero-copy{max-width:610px!important}
+.hero h1,.page-hero h1{
+  max-width:620px!important;
+  font-size:clamp(3rem,4.65vw,5rem)!important;
+  line-height:.965!important;
+  letter-spacing:-.058em!important;
+  margin:14px 0 19px!important;
+}
+.hero .lead,.page-hero-copy>p{
+  max-width:600px!important;
+  font-size:clamp(.98rem,1.08vw,1.08rem)!important;
+  line-height:1.62!important;
+}
+.hero-media,.page-hero-media{display:block!important;width:100%!important;min-width:0!important}
+
+/* Service + case-study heroes use the same professional two-column rhythm. */
+.service-detail-hero{padding:0!important}
+.service-detail-hero>.shell{padding-top:26px!important}
+.service-detail-head{
+  display:grid!important;
+  grid-template-columns:minmax(0,.92fr) minmax(430px,1.08fr)!important;
+  gap:clamp(54px,6vw,88px)!important;
+  align-items:center!important;
+  padding:34px 0 78px!important;
+}
+.service-detail-copy>h1{font-size:clamp(2.9rem,4.45vw,4.8rem)!important;line-height:.97!important}
+.service-detail-visual{display:block!important;min-width:0!important}
+
+.case-hero-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,.9fr) minmax(440px,1.1fr)!important;
+  gap:clamp(54px,6vw,88px)!important;
+  align-items:center!important;
+}
+.case-head h1{font-size:clamp(3rem,4.6vw,5rem)!important;line-height:.97!important}
+.case-hero-media{display:block!important;min-width:0!important}
+
+/* Restore the coded studio preview as the hero element. */
+.studio-hero-system{
+  max-width:620px!important;
+  margin-inline:auto!important;
+  transform:none!important;
+}
+.studio-browser{box-shadow:0 30px 76px rgba(23,44,84,.14)!important}
+
+/* Laptop widths keep two columns instead of pushing the visual underneath. */
+@media (min-width:861px) and (max-width:1120px){
+  .hero,.page-hero{
+    grid-template-columns:minmax(0,.96fr) minmax(380px,1.04fr)!important;
+    gap:clamp(38px,4vw,58px)!important;
+    min-height:570px!important;
+  }
+  .hero h1,.page-hero h1{font-size:clamp(2.55rem,4.35vw,3.8rem)!important}
+  .hero .lead,.page-hero-copy>p{font-size:.94rem!important;line-height:1.55!important}
+  .service-detail-head,.case-hero-grid{
+    grid-template-columns:minmax(0,.96fr) minmax(370px,1.04fr)!important;
+    gap:clamp(38px,4vw,58px)!important;
+  }
+  .service-detail-copy>h1,.case-head h1{font-size:clamp(2.45rem,4.2vw,3.65rem)!important}
+}
+
+/* Mobile/tablet hero: no illustration below the text. */
+@media (max-width:860px){
+  .home-hero-wrap,.page-hero-wrap,.service-detail-hero,.case-hero-wrap{
+    margin:10px 7px 0!important;
+    border-radius:26px!important;
+    background:
+      radial-gradient(circle at 100% 0%,rgba(75,104,245,.075),transparent 37%),
+      linear-gradient(180deg,#fbfcff 0%,#fff 100%)!important;
+  }
+  .hero,.page-hero{
+    display:block!important;
+    min-height:auto!important;
+    padding:38px 0 42px!important;
+  }
+  .hero-copy,.page-hero-copy{max-width:none!important;width:100%!important;text-align:left!important}
+  .hero-media,.page-hero-media,.service-detail-visual,.case-hero-media{display:none!important}
+  .breadcrumb{display:none!important}
+  .hero h1,.page-hero h1{
+    max-width:100%!important;
+    font-size:clamp(2.15rem,9.5vw,3.05rem)!important;
+    line-height:.985!important;
+    letter-spacing:-.052em!important;
+    margin:12px 0 14px!important;
+  }
+  .hero .lead,.page-hero-copy>p{max-width:100%!important;font-size:.92rem!important;line-height:1.52!important}
+  .hero-actions{margin-top:20px!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
+  .hero-actions .btn{width:100%!important;min-height:43px!important;padding:9px 8px!important;font-size:.7rem!important;text-align:center!important}
+  .microproof,.hero-proof-row{display:none!important}
+
+  .service-detail-hero>.shell{padding-top:0!important}
+  .service-detail-head,.case-hero-grid{display:block!important;padding:36px 0 42px!important}
+  .service-detail-copy,.case-head{width:100%!important;max-width:none!important}
+  .service-detail-copy>h1,.case-head h1{font-size:clamp(2.15rem,9.5vw,3.05rem)!important;line-height:.985!important}
+  .service-detail-copy>p,.case-head>p{font-size:.92rem!important;line-height:1.52!important}
+  .service-best-fit{margin-top:15px!important;padding:11px 12px!important}
+  .case-meta{margin-top:14px!important}
+}
+
+@media (max-width:520px){
+  .hero,.page-hero,.service-detail-head,.case-hero-grid{padding-top:31px!important;padding-bottom:35px!important}
+  .hero h1,.page-hero h1,.service-detail-copy>h1,.case-head h1{font-size:clamp(2.05rem,10vw,2.72rem)!important}
+  .hero .lead,.page-hero-copy>p,.service-detail-copy>p,.case-head>p{font-size:.86rem!important;line-height:1.48!important}
+  .hero-actions{grid-template-columns:1fr!important}
+  .hero-actions .btn{font-size:.71rem!important;min-height:42px!important}
+  .service-best-fit{display:none!important}
+}

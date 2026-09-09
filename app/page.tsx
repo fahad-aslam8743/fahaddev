@@ -95,12 +95,11 @@ export default async function Home() {
   const featuredProjects = await getFeaturedProjects();
   return (
     <>
-      <section className="engine-hero-section engine-home-hero">
-        <HeroSystem kind="home" context={featuredProjects[0]?.title || 'FahadDev'} />
-        <div className="shell engine-hero-content">
-          <Reveal className="engine-hero-copy hero-copy">
+      <section className="home-hero-wrap">
+        <div className="shell hero">
+          <Reveal className="hero-copy">
             <span className="eyebrow">Custom web development for growing businesses</span>
-            <h1>Build the website your customers understand — and the system your business can grow on.</h1>
+            <div className="hero-title-lockup"><h1>Build the website your customers understand — and the system your business can grow on.</h1><span className="hero-title-rule" aria-hidden="true"/></div>
             <p className="lead">
               Custom websites, e-commerce, dashboards and web apps with the design, CMS, data, payments, admin and deployment connected from the start.
             </p>
@@ -115,6 +114,13 @@ export default async function Home() {
             <p className="microproof">
               <Check size={15} /> No technical brief needed <span>·</span> Scope before commitment <span>·</span> Direct developer access
             </p>
+          </Reveal>
+          <Reveal className="hero-media">
+            <HeroSystem
+              kind="home"
+              imageUrl={featuredProjects[0]?.imageUrl}
+              context={featuredProjects[0]?.imageUrl ? featuredProjects[0]?.title : undefined}
+            />
           </Reveal>
         </div>
       </section>
